@@ -47,7 +47,7 @@ const hi: Translations = {
   demoNavigator: {
     componentsTab: "कंपोनेंट्स",
     debugTab: "डीबग",
-    communityTab: "समुदाय",
+    HomeTab: "समुदाय",
     podcastListTab: "पॉडकास्ट",
   },
   demoCommunityScreen: {
@@ -73,7 +73,7 @@ const hi: Translations = {
       "चाहे वह एक पूरा प्रोजेक्ट चलाना हो या हमारे हैंड्स-ऑन प्रशिक्षण के साथ टीमों को गति देना हो, Infinite Red लगभग किसी भी React Native प्रोजेक्ट में मदद कर सकता है।",
     hireUsLink: "हमें एक संदेश भेजें",
   },
-  demoShowroomScreen: {
+  ComponentsScreen: {
     jumpStart: "अपने प्रोजेक्ट को जंप स्टार्ट करने के लिए कंपोनेंट्स!",
     lorem2Sentences:
       "कोई भी काम जो आप नहीं करना चाहते, उसे करने के लिए किसी और को ढूंढना चाहिए। जो लोग दूसरों की मदद करते हैं, वे खुद की भी मदद करते हैं।",

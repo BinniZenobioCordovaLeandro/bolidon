@@ -4,6 +4,7 @@ import { I18nManager } from "react-native"
 
 // if English isn't your default language, move Translations to the appropriate language file.
 import en, { Translations } from "./en"
+import es from "./es"
 import ar from "./ar"
 import ko from "./ko"
 import fr from "./fr"
@@ -17,7 +18,7 @@ import hi from "./hi"
 // to use regional locales use { "en-US": enUS } etc
 const fallbackLocale = "en-US"
 export const i18n = new I18n(
-  { ar, en, "en-US": en, ko, fr, ja, hi },
+  { ar, en, "en-US": en, es, ko, fr, ja, hi },
   { locale: fallbackLocale, defaultLocale: fallbackLocale, enableFallback: true },
 )
 

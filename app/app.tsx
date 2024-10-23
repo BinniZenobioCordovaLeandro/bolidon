@@ -16,19 +16,19 @@ if (__DEV__) {
   // If you turn it off in metro.config.js, you'll have to manually import it.
   require("./devtools/ReactotronConfig.ts")
 }
-import "./utils/gestureHandler"
-import "./i18n"
-import "./utils/ignoreWarnings"
 import { useFonts } from "expo-font"
+import * as Linking from "expo-linking"
 import React from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
-import * as Linking from "expo-linking"
+import Config from "./config"
+import "./i18n"
 import { useInitialRootStore } from "./models"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { ErrorBoundary } from "./screens/ErrorScreen/ErrorBoundary"
-import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
-import Config from "./config"
+import "./utils/gestureHandler"
+import "./utils/ignoreWarnings"
+import * as storage from "./utils/storage"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 

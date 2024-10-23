@@ -47,7 +47,7 @@ const ar: Translations = {
   demoNavigator: {
     componentsTab: "عناصر",
     debugTab: "تصحيح",
-    communityTab: "واصل اجتماعي",
+    HomeTab: "واصل اجتماعي",
     podcastListTab: "البودكاست",
   },
   demoCommunityScreen: {
@@ -73,7 +73,7 @@ const ar: Translations = {
       "سواء كان الامر يتعلّق بتشغيل مشروع كامل او اعداد الفرق بسرعة من خلال التدريب العلمي لدينا، يمكن ان يساعد Infinite Red اللامتناهي في اي مشروع محلي يتفاعل معه.",
     hireUsLink: "ارسل لنا رسالة",
   },
-  demoShowroomScreen: {
+  ComponentsScreen: {
     jumpStart: "مكونات او عناصر لبدء مشروعك",
     lorem2Sentences:
       "عامل الناس بأخلاقك لا بأخلاقهم. عامل الناس بأخلاقك لا بأخلاقهم. عامل الناس بأخلاقك لا بأخلاقهم",

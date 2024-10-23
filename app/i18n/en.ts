@@ -3,16 +3,15 @@ import demoEn from "./demo-en"
 const en = {
   common: {
     ok: "OK!",
-    cancel: "Cancel",
-    back: "Back",
-    logOut: "Log Out",
+    cancel: "Cancelar",
+    back: "Atras",
+    logOut: "Cerrar sesión",
   },
   welcomeScreen: {
-    postscript:
-      "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
-    readyForLaunch: "Your app, almost ready for launch!",
-    exciting: "(ohh, this is exciting!)",
-    letsGo: "Let's go!",
+    postscript: "Pisa a fondo y disfruta del viaje.",
+    readyForLaunch: "¡Listo para convertir tu vehiculo en un BOLIDON!",
+    exciting: "¡Esto va a ser emocionante!",
+    letsGo: "¡Vamos causa!",
   },
   errorScreen: {
     title: "Something went wrong!",
@@ -28,7 +27,6 @@ const en = {
       button: "Let's try this again",
     },
   },
-
   errors: {
     invalidEmail: "Invalid email address.",
   },
@@ -44,41 +42,24 @@ const en = {
     hint: "Hint: you can use any email address and your favorite password :)",
   },
   demoNavigator: {
+    HomeTab: "Bolidon",
     componentsTab: "Components",
-    debugTab: "Debug",
-    communityTab: "Community",
-    podcastListTab: "Podcast",
+    debugTab: "Perfil",
+    podcastListTab: "Ordenes de Servicio",
   },
-  demoCommunityScreen: {
-    title: "Connect with the community",
+  HomeScreen: {
+    title: "Tu vehiculo es un BOLIDON",
     tagLine:
-      "Plug in to Infinite Red's community of React Native engineers and level up your app development with us!",
-    joinUsOnSlackTitle: "Join us on Slack",
-    joinUsOnSlack:
-      "Wish there was a place to connect with React Native engineers around the world? Join the conversation in the Infinite Red Community Slack! Our growing community is a safe space to ask questions, learn from others, and grow your network.",
-    joinSlackLink: "Join the Slack Community",
-    makeIgniteEvenBetterTitle: "Make Ignite even better",
-    makeIgniteEvenBetter:
-      "Have an idea to make Ignite even better? We're happy to hear that! We're always looking for others who want to help us build the best React Native tooling out there. Join us over on GitHub to join us in building the future of Ignite.",
-    contributeToIgniteLink: "Contribute to Ignite",
-    theLatestInReactNativeTitle: "The latest in React Native",
-    theLatestInReactNative: "We're here to keep you current on all React Native has to offer.",
-    reactNativeRadioLink: "React Native Radio",
-    reactNativeNewsletterLink: "React Native Newsletter",
-    reactNativeLiveLink: "React Native Live",
-    chainReactConferenceLink: "Chain React Conference",
-    hireUsTitle: "Hire Infinite Red for your next project",
-    hireUs:
-      "Whether it's running a full project or getting teams up to speed with our hands-on training, Infinite Red can help with just about any React Native project.",
-    hireUsLink: "Send us a message",
+      "Manten tu vehiculo en optimas condiciones, con los mejores productos y servicios del mercado.",
+    offers: "Tienes ofertas",
+    serviceOrder: "Tienes orden de servicio",
   },
-  demoShowroomScreen: {
-    jumpStart: "Components to jump start your project!",
-    lorem2Sentences:
-      "Nulla cupidatat deserunt amet quis aliquip nostrud do adipisicing. Adipisicing excepteur elit laborum Lorem adipisicing do duis.",
-    demoHeaderTxExample: "Yay",
-    demoViaTxProp: "Via `tx` Prop",
-    demoViaSpecifiedTxProp: "Via `{{prop}}Tx` Prop",
+  ComponentsScreen: {
+    jumpStart: "Tus componentes",
+  },
+  ProfileScreen: {
+    title: "Perfil",
+    reportBugs: "Reportar errores",
   },
   demoDebugScreen: {
     howTo: "HOW TO",

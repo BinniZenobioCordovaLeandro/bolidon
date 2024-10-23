@@ -48,7 +48,7 @@ const ja: Translations = {
   demoNavigator: {
     componentsTab: "コンポーネント",
     debugTab: "デバッグ",
-    communityTab: "コミュニティ",
+    HomeTab: "コミュニティ",
     podcastListTab: "ポッドキャスト",
   },
   demoCommunityScreen: {
@@ -74,7 +74,7 @@ const ja: Translations = {
       "それがプロジェクト全体でも、チームにトレーニングをしてあげたい時でも、Infinite RedはReact Nativeのことであればなんでもお手伝いができます。",
     hireUsLink: "メッセージを送る",
   },
-  demoShowroomScreen: {
+  ComponentsScreen: {
     jumpStart: "あなたのプロジェクトをスタートさせるコンポーネントです！",
     lorem2Sentences:
       "Nulla cupidatat deserunt amet quis aliquip nostrud do adipisicing. Adipisicing excepteur elit laborum Lorem adipisicing do duis.",

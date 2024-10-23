@@ -30,24 +30,24 @@ import {
   Screen,
   Text,
   Toggle,
-} from "../components"
-import { isRTL, translate } from "../i18n"
-import { useStores } from "../models"
-import { Episode } from "../models/Episode"
-import { DemoTabScreenProps } from "../navigators/DemoNavigator"
-import { colors, spacing } from "../theme"
-import { delay } from "../utils/delay"
-import { openLinkInBrowser } from "../utils/openLinkInBrowser"
+} from "../../components"
+import { isRTL, translate } from "../../i18n"
+import { useStores } from "../../models"
+import { Episode } from "../../models/Episode"
+import { DemoTabScreenProps } from "../../navigators/DemoNavigator"
+import { colors, spacing } from "../../theme"
+import { delay } from "../../utils/delay"
+import { openLinkInBrowser } from "../../utils/openLinkInBrowser"
 
 const ICON_SIZE = 14
 
-const rnrImage1 = require("../../assets/images/demo/rnr-image-1.png")
-const rnrImage2 = require("../../assets/images/demo/rnr-image-2.png")
-const rnrImage3 = require("../../assets/images/demo/rnr-image-3.png")
+const rnrImage1 = require("../../../assets/images/demo/rnr-image-1.png")
+const rnrImage2 = require("../../../assets/images/demo/rnr-image-2.png")
+const rnrImage3 = require("../../../assets/images/demo/rnr-image-3.png")
 const rnrImages = [rnrImage1, rnrImage2, rnrImage3]
 
-export const DemoPodcastListScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = observer(
-  function DemoPodcastListScreen(_props) {
+export const OrderServiceScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = observer(
+  function OrderServiceScreen(_props) {
     const { episodeStore } = useStores()
 
     const [refreshing, setRefreshing] = React.useState(false)
@@ -65,7 +65,7 @@ export const DemoPodcastListScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = 
     // simulate a longer refresh, if the refresh is too fast for UX
     async function manualRefresh() {
       setRefreshing(true)
-      await Promise.all([episodeStore.fetchEpisodes(), delay(750)])
+      await Promise.all([episodeStore.fetchEpisodes(), delay(3750)])
       setRefreshing(false)
     }
 

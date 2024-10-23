@@ -2,6 +2,11 @@
   "name": "bolidon",
   "displayName": "bolidon",
   "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "9843dc59-6b4f-4013-9ad4-3dea3e63f4b7"
+      }
+    },
     "name": "bolidon",
     "slug": "bolidon",
     "scheme": "bolidon",

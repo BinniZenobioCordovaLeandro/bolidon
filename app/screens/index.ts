@@ -1,9 +1,9 @@
-export * from "./WelcomeScreen"
+export * from "./WelcomeScreen/WelcomeScreen"
 
-export * from "./LoginScreen"
-export * from "./DemoCommunityScreen"
-export * from "./DemoDebugScreen"
-export * from "./DemoShowroomScreen/DemoShowroomScreen"
+export * from "./LoginScreen/LoginScreen"
+export * from "./HomeScreen/HomeScreen"
+export * from "./ProfileScreen/ProfileScreen"
+export * from "./ComponentsScreen/ComponentsScreen"
 
 export * from "./ErrorScreen/ErrorBoundary"
 // export other screens here

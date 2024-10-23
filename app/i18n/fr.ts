@@ -48,7 +48,7 @@ const fr: Translations = {
   demoNavigator: {
     componentsTab: "Composants",
     debugTab: "Débogage",
-    communityTab: "Communauté",
+    HomeTab: "Communauté",
     podcastListTab: "Podcasts",
   },
   demoCommunityScreen: {
@@ -75,7 +75,7 @@ const fr: Translations = {
       "Que ce soit pour gérer un projet complet ou pour former des équipes à notre formation pratique, Infinite Red peut vous aider pour presque tous les projets React Native.",
     hireUsLink: "Envoyez-nous un message",
   },
-  demoShowroomScreen: {
+  ComponentsScreen: {
     jumpStart: "Composants pour démarrer votre projet !",
     lorem2Sentences:
       "Nulla cupidatat deserunt amet quis aliquip nostrud do adipisicing. Adipisicing excepteur elit laborum Lorem adipisicing do duis.",

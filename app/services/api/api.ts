@@ -6,10 +6,13 @@
  * documentation for more details.
  */
 import { ApiResponse, ApisauceInstance, create } from "apisauce"
+import { ComponentSnapshotIn } from "app/models/Component"
 import Config from "../../config"
-import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
-import type { ApiConfig, ApiFeedResponse } from "./api.types"
 import type { EpisodeSnapshotIn } from "../../models/Episode"
+import type { ApiConfig, ApiFeedResponse } from "./api.types"
+import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
+import componentsMock from "./mocks/components.json"
+
 
 /**
  * Configuring the apisauce instance.
@@ -71,6 +74,21 @@ export class Api {
       if (__DEV__ && e instanceof Error) {
         console.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
       }
+      return { kind: "bad-data" }
+    }
+  }
+
+  async getComponents(): Promise<
+    { kind: "ok"; components: ComponentSnapshotIn[] } | GeneralApiProblem
+  > {
+    try {
+
+      const components: ComponentSnapshotIn[] = componentsMock as unknown as ComponentSnapshotIn[];
+
+      console.log("🎸 components", components);
+
+      return { kind: "ok", components }
+    } catch {
       return { kind: "bad-data" }
     }
   }
