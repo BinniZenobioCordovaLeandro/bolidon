@@ -12,6 +12,7 @@ import type { EpisodeSnapshotIn } from "../../models/Episode"
 import type { ApiConfig, ApiFeedResponse } from "./api.types"
 import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
 import componentsMock from "./mocks/components.json"
+import orderServicesMock from "./mocks/orderServices.json"
 
 
 /**
@@ -47,11 +48,15 @@ export class Api {
   /**
    * Gets a list of recent React Native Radio episodes.
    */
-  async getEpisodes(): Promise<{ kind: "ok"; episodes: EpisodeSnapshotIn[] } | GeneralApiProblem> {
+  async getOrderServices(): Promise<{ kind: "ok"; episodes: EpisodeSnapshotIn[] } | GeneralApiProblem> {
     // make the api call
-    const response: ApiResponse<ApiFeedResponse> = await this.apisauce.get(
-      `api.json?rss_url=https%3A%2F%2Ffeeds.simplecast.com%2FhEI_f9Dx`,
-    )
+    const response: ApiResponse<ApiFeedResponse> = {
+      ok: true,
+      data: orderServicesMock as unknown as ApiFeedResponse,
+      status: 200,
+      problem: null,
+      originalError: null,
+    }
 
     // the typical ways to die when calling an api
     if (!response.ok) {
@@ -61,11 +66,11 @@ export class Api {
 
     // transform the data into the format we are expecting
     try {
-      const rawData = response.data
+      const rawData = orderServicesMock;
 
       // This is where we transform the data into the shape we expect for our MST model.
       const episodes: EpisodeSnapshotIn[] =
-        rawData?.items.map((raw) => ({
+        rawData?.map((raw) => ({
           ...raw,
         })) ?? []
 

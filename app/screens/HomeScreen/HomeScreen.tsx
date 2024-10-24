@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { Image, View } from "react-native"
 import { AutoImage, ListItem, Screen, Text } from "../../components"
 import { isRTL } from "../../i18n"
-import { DemoTabScreenProps } from "../../navigators/DemoNavigator"
+import { DemoTabScreenProps } from "../../navigators/HomeNavigator"
 import { openLinkInBrowser } from "../../utils/openLinkInBrowser"
 import { $carImage, $container, $logo, $logoContainer, $tagline, $title } from "./styles"
 

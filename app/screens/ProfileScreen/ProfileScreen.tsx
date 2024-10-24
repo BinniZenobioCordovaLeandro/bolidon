@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { Linking, TextStyle, View, ViewStyle } from "react-native"
 import { Button, Screen, Text } from "../../components"
-import { DemoTabScreenProps } from "../../navigators/DemoNavigator"
+import { DemoTabScreenProps } from "../../navigators/HomeNavigator"
 import { colors, spacing } from "../../theme"
 import { isRTL } from "../../i18n"
 import { useStores } from "../../models"
@@ -18,7 +18,7 @@ export const ProfileScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Profi
   _props,
 ) {
   const {
-    authenticationStore: { logout },
+    authenticationStore: { logout, authEmail },
   } = useStores()
 
   return (
@@ -29,6 +29,7 @@ export const ProfileScreen: FC<DemoTabScreenProps<"DemoDebug">> = function Profi
         onPress={() => openLinkInBrowser("")}
       />
       <Text style={$title} preset="heading" tx="ProfileScreen.title" />
+      <Text text={authEmail} preset="subheading" />
       <View style={$buttonContainer}>
         <Button style={$button} tx="common.logOut" onPress={logout} />
       </View>

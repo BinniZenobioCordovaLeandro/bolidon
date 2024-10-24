@@ -18,7 +18,7 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import Config from "../config"
 import { useStores } from "../models"
-import { DemoNavigator, DemoTabParamList } from "./DemoNavigator"
+import { HomeNavigator, DemoTabParamList } from "./HomeNavigator"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 
 /**
@@ -70,7 +70,7 @@ const AppStack = observer(function AppStack() {
         <>
           <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
 
-          <Stack.Screen name="Demo" component={DemoNavigator} />
+          <Stack.Screen name="Demo" component={HomeNavigator} />
         </>
       ) : (
         <>

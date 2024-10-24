@@ -14,11 +14,12 @@ interface Enclosure {
 /**
  * This represents an episode of React Native Radio.
  */
-export const EpisodeModel = types
+export const OrderServiceModel = types
   .model("Episode")
   .props({
     guid: types.identifier,
     title: "",
+    subtitle: "",
     pubDate: "", // Ex: 2022-08-12 21:05:36
     link: "",
     author: "",
@@ -29,9 +30,9 @@ export const EpisodeModel = types
     categories: types.array(types.string),
   })
   .actions(withSetPropAction)
-  .views((episode) => ({
+  .views((orderService) => ({
     get parsedTitleAndSubtitle() {
-      const defaultValue = { title: episode.title?.trim(), subtitle: "" }
+      const defaultValue = { title: orderService.title?.trim() }
 
       if (!defaultValue.title) return defaultValue
 
@@ -43,7 +44,7 @@ export const EpisodeModel = types
     },
     get datePublished() {
       try {
-        const formatted = formatDate(episode.pubDate)
+        const formatted = formatDate(orderService.pubDate)
         return {
           textLabel: formatted,
           accessibilityLabel: translate("demoPodcastListScreen.accessibility.publishLabel", {
@@ -55,7 +56,7 @@ export const EpisodeModel = types
       }
     },
     get duration() {
-      const seconds = Number(episode.enclosure.duration)
+      const seconds = Number(orderService.enclosure.duration)
       const h = Math.floor(seconds / 3600)
       const m = Math.floor((seconds % 3600) / 60)
       const s = Math.floor((seconds % 3600) % 60)
@@ -74,6 +75,6 @@ export const EpisodeModel = types
     },
   }))
 
-export interface Episode extends Instance<typeof EpisodeModel> {}
-export interface EpisodeSnapshotOut extends SnapshotOut<typeof EpisodeModel> {}
-export interface EpisodeSnapshotIn extends SnapshotIn<typeof EpisodeModel> {}
+export interface Episode extends Instance<typeof OrderServiceModel> {}
+export interface EpisodeSnapshotOut extends SnapshotOut<typeof OrderServiceModel> {}
+export interface EpisodeSnapshotIn extends SnapshotIn<typeof OrderServiceModel> {}

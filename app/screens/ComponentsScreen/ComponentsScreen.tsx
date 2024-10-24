@@ -13,7 +13,7 @@ import {
 } from "react-native"
 import { ListItem, Screen, Text } from "../../components"
 import { TxKeyPath, isRTL } from "../../i18n"
-import { DemoTabScreenProps } from "../../navigators/DemoNavigator"
+import { DemoTabScreenProps } from "../../navigators/HomeNavigator"
 import { spacing } from "../../theme"
 
 const reactNativeLiveLogo = require("../../../assets/images/demo/rnl-logo.png")
@@ -60,8 +60,9 @@ export const ComponentsScreen: FC<DemoTabScreenProps<"DemoShowroom">> = function
         stickySectionHeadersEnabled={false}
         sections={[
           {
-            name: "2021/09/01",
+            name: new Date().toLocaleDateString(),
             description: "Proximos cambios",
+            subtitle: "Estamos a menos de 500 km para realizar estos cambios",
             data: [...componentStore.components],
           },
         ]}
@@ -92,7 +93,8 @@ export const ComponentsScreen: FC<DemoTabScreenProps<"DemoShowroom">> = function
               <Text preset="heading" style={$demoItemName}>
                 {section.name}
               </Text>
-              <Text style={$demoItemDescription}>{section.description}</Text>
+              <Text style={$demoItemTitle}>{section.description}</Text>
+              <Text style={$demoItemSubtitle}>{section.subtitle}</Text>
             </View>
           )
         }}
@@ -132,7 +134,11 @@ const $demoItemName: TextStyle = {
   marginBottom: spacing.md,
 }
 
-const $demoItemDescription: TextStyle = {
+const $demoItemTitle: TextStyle = {
+  fontWeight: "bold",
+}
+
+const $demoItemSubtitle: TextStyle = {
   marginBottom: spacing.xxl,
 }
 

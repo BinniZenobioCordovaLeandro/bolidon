@@ -33,7 +33,7 @@ const en = {
   loginScreen: {
     logIn: "Log In",
     enterDetails:
-      "Enter your details below to unlock top secret info. You'll never guess what we've got waiting. Or maybe you will; it's not rocket science here.",
+      "Ingresa tu correo y contraseña para acceder a tu cuenta. Si no tienes una cuenta, puedes crear una.",
     emailFieldLabel: "Email",
     passwordFieldLabel: "Password",
     emailFieldPlaceholder: "Enter your email address",

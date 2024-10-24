@@ -1,4 +1,4 @@
-import { EpisodeModel } from "./Episode"
+import { OrderServiceModel } from "./Episode"
 
 const data = {
   guid: "f91f2ea0-378a-4a90-9a83-d438a0cc32f6",
@@ -22,7 +22,7 @@ const data = {
     },
   },
 }
-const episode = EpisodeModel.create(data)
+const episode = OrderServiceModel.create(data)
 
 test("publish date format", () => {
   expect(episode.datePublished.textLabel).toBe("Jan 20, 2022")

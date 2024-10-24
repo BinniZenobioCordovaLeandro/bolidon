@@ -34,10 +34,9 @@ import {
 import { isRTL, translate } from "../../i18n"
 import { useStores } from "../../models"
 import { Episode } from "../../models/Episode"
-import { DemoTabScreenProps } from "../../navigators/DemoNavigator"
+import { DemoTabScreenProps } from "../../navigators/HomeNavigator"
 import { colors, spacing } from "../../theme"
 import { delay } from "../../utils/delay"
-import { openLinkInBrowser } from "../../utils/openLinkInBrowser"
 
 const ICON_SIZE = 14
 
@@ -48,24 +47,24 @@ const rnrImages = [rnrImage1, rnrImage2, rnrImage3]
 
 export const OrderServiceScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = observer(
   function OrderServiceScreen(_props) {
-    const { episodeStore } = useStores()
+    const { orderServiceStore } = useStores()
 
     const [refreshing, setRefreshing] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(false)
 
     // initially, kick off a background refresh without the refreshing UI
     useEffect(() => {
-      ;(async function load() {
+      ; (async function load() {
         setIsLoading(true)
-        await episodeStore.fetchEpisodes()
+        await orderServiceStore.fetchOrderServices()
         setIsLoading(false)
       })()
-    }, [episodeStore])
+    }, [orderServiceStore])
 
     // simulate a longer refresh, if the refresh is too fast for UX
     async function manualRefresh() {
       setRefreshing(true)
-      await Promise.all([episodeStore.fetchEpisodes(), delay(3750)])
+      await Promise.all([orderServiceStore.fetchOrderServices(), delay(3750)])
       setRefreshing(false)
     }
 
@@ -77,8 +76,8 @@ export const OrderServiceScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = obs
       >
         <ListView<Episode>
           contentContainerStyle={$listContentContainer}
-          data={episodeStore.episodesForList.slice()}
-          extraData={episodeStore.favorites.length + episodeStore.episodes.length}
+          data={orderServiceStore.orderServicesForList.slice()}
+          extraData={orderServiceStore.favorites.length + orderServiceStore.episodes.length}
           refreshing={refreshing}
           estimatedItemSize={177}
           onRefresh={manualRefresh}
@@ -90,16 +89,16 @@ export const OrderServiceScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = obs
                 preset="generic"
                 style={$emptyState}
                 headingTx={
-                  episodeStore.favoritesOnly
+                  orderServiceStore.favoritesOnly
                     ? "demoPodcastListScreen.noFavoritesEmptyState.heading"
                     : undefined
                 }
                 contentTx={
-                  episodeStore.favoritesOnly
+                  orderServiceStore.favoritesOnly
                     ? "demoPodcastListScreen.noFavoritesEmptyState.content"
                     : undefined
                 }
-                button={episodeStore.favoritesOnly ? "" : undefined}
+                button={orderServiceStore.favoritesOnly ? "" : undefined}
                 buttonOnPress={manualRefresh}
                 imageStyle={$emptyStateImage}
                 ImageProps={{ resizeMode: "contain" }}
@@ -109,12 +108,12 @@ export const OrderServiceScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = obs
           ListHeaderComponent={
             <View style={$heading}>
               <Text preset="heading" tx="demoPodcastListScreen.title" />
-              {(episodeStore.favoritesOnly || episodeStore.episodesForList.length > 0) && (
+              {(orderServiceStore.favoritesOnly || orderServiceStore.orderServicesForList.length > 0) && (
                 <View style={$toggle}>
                   <Toggle
-                    value={episodeStore.favoritesOnly}
+                    value={orderServiceStore.favoritesOnly}
                     onValueChange={() =>
-                      episodeStore.setProp("favoritesOnly", !episodeStore.favoritesOnly)
+                      orderServiceStore.setProp("favoritesOnly", !orderServiceStore.favoritesOnly)
                     }
                     variant="switch"
                     labelTx="demoPodcastListScreen.onlyFavorites"
@@ -129,8 +128,8 @@ export const OrderServiceScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = obs
           renderItem={({ item }) => (
             <EpisodeCard
               episode={item}
-              isFavorite={episodeStore.hasFavorite(item)}
-              onPressFavorite={() => episodeStore.toggleFavorite(item)}
+              isFavorite={orderServiceStore.hasFavorite(item)}
+              onPressFavorite={() => orderServiceStore.toggleFavorite(item)}
             />
           )}
         />
@@ -215,7 +214,8 @@ const EpisodeCard = observer(function EpisodeCard({
   }
 
   const handlePressCard = () => {
-    openLinkInBrowser(episode.enclosure.link)
+    // sent to page detail
+    // openLinkInBrowser(episode.enclosure.link)
   }
 
   const ButtonLeftAccessory: ComponentType<ButtonAccessoryProps> = useMemo(
@@ -260,16 +260,21 @@ const EpisodeCard = observer(function EpisodeCard({
           >
             {episode.datePublished.textLabel}
           </Text>
-          <Text
-            style={$metadataText}
-            size="xxs"
-            accessibilityLabel={episode.duration.accessibilityLabel}
-          >
-            {episode.duration.textLabel}
-          </Text>
         </View>
       }
-      content={`${episode.parsedTitleAndSubtitle.title} - ${episode.parsedTitleAndSubtitle.subtitle}`}
+      ContentComponent={
+        <>
+          <Text>
+            {`${episode.parsedTitleAndSubtitle.title}}`}
+          </Text>
+          <Text>
+            {`${episode.subtitle}`}
+          </Text>
+          <Text
+            text={`${episode.description}`}
+          />
+        </>
+      }
       {...accessibilityHintProps}
       RightComponent={<Image source={imageUri} style={$itemThumbnail} />}
       FooterComponent={
@@ -286,7 +291,7 @@ const EpisodeCard = observer(function EpisodeCard({
         >
           <Text
             size="xxs"
-            accessibilityLabel={episode.duration.accessibilityLabel}
+            accessibilityLabel={episode.datePublished.accessibilityLabel}
             weight="medium"
             text={
               isFavorite

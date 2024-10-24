@@ -1,19 +1,19 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { api } from "../services/api"
-import { Episode, EpisodeModel } from "./Episode"
+import { Episode, OrderServiceModel } from "./Episode"
 import { withSetPropAction } from "./helpers/withSetPropAction"
 
-export const EpisodeStoreModel = types
+export const OrderServiceStoreModel = types
   .model("EpisodeStore")
   .props({
-    episodes: types.array(EpisodeModel),
-    favorites: types.array(types.reference(EpisodeModel)),
+    episodes: types.array(OrderServiceModel),
+    favorites: types.array(types.reference(OrderServiceModel)),
     favoritesOnly: false,
   })
   .actions(withSetPropAction)
   .actions((store) => ({
-    async fetchEpisodes() {
-      const response = await api.getEpisodes()
+    async fetchOrderServices() {
+      const response = await api.getOrderServices()
       if (response.kind === "ok") {
         store.setProp("episodes", response.episodes)
       } else {
@@ -28,7 +28,7 @@ export const EpisodeStoreModel = types
     },
   }))
   .views((store) => ({
-    get episodesForList() {
+    get orderServicesForList() {
       return store.favoritesOnly ? store.favorites : store.episodes
     },
 
@@ -46,5 +46,5 @@ export const EpisodeStoreModel = types
     },
   }))
 
-export interface EpisodeStore extends Instance<typeof EpisodeStoreModel> {}
-export interface EpisodeStoreSnapshot extends SnapshotOut<typeof EpisodeStoreModel> {}
+export interface OrderServiceStore extends Instance<typeof OrderServiceStoreModel> {}
+export interface OrderServiceSnapshot extends SnapshotOut<typeof OrderServiceStoreModel> {}
