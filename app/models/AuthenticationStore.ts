@@ -1,3 +1,4 @@
+import { Auth } from "app/services/api"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
 export const AuthenticationStoreModel = types
@@ -5,8 +6,12 @@ export const AuthenticationStoreModel = types
   .props({
     authToken: types.maybe(types.string),
     authEmail: "",
+    isService: false,
   })
   .views((store) => ({
+    get isService() {
+      return !!store.isService
+    },
     get isAuthenticated() {
       return !!store.authToken
     },
@@ -19,6 +24,23 @@ export const AuthenticationStoreModel = types
     },
   }))
   .actions((store) => ({
+    async authenticate(password: string) {
+      const user = await Auth.signInWithCredential(store.authEmail, password)
+      console.log("authenticate", user);
+      // We'll mock this with a fake token.
+      this.setAuthToken(String(Date.now()))
+      return true;
+    },
+    async authenticateWithGoogle() {
+      const token = await Auth.signInWithGoogle();
+      console.log("token", token);
+      this.setAuthToken("token");
+    },
+    async register(password: string) {
+      const user = await Auth.registerCredential(store.authEmail, password);
+      console.log("register", user);
+      return !!user
+    },
     setAuthToken(value?: string) {
       store.authToken = value
     },
@@ -28,8 +50,9 @@ export const AuthenticationStoreModel = types
     logout() {
       store.authToken = undefined
       store.authEmail = ""
+      Auth.signOut()
     },
   }))
 
-export interface AuthenticationStore extends Instance<typeof AuthenticationStoreModel> {}
-export interface AuthenticationStoreSnapshot extends SnapshotOut<typeof AuthenticationStoreModel> {}
+export interface AuthenticationStore extends Instance<typeof AuthenticationStoreModel> { }
+export interface AuthenticationStoreSnapshot extends SnapshotOut<typeof AuthenticationStoreModel> { }

@@ -6,9 +6,11 @@ import { useStores } from "../../models"
 import { AppStackScreenProps } from "../../navigators"
 import { colors, spacing } from "../../theme"
 
-interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
+interface LoginScreenProps extends AppStackScreenProps<"Login"> { }
 
 export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
+  const { navigation } = _props
+
   const authPasswordInput = useRef<TextInput>(null)
 
   const [authPassword, setAuthPassword] = useState("")
@@ -16,25 +18,27 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attemptsCount, setAttemptsCount] = useState(0)
   const {
-    authenticationStore: { authEmail, setAuthEmail, setAuthToken, validationError },
+    authenticationStore: { authEmail, setAuthEmail, validationError, authenticate, authenticateWithGoogle },
   } = useStores()
 
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
-    setAuthEmail("ignite@infinite.red")
-    setAuthPassword("ign1teIsAwes0m3")
-
-    // Return a "cleanup" function that React will run when the component unmounts
+    setAuthEmail(authEmail)
+    setAuthPassword("")
     return () => {
       setAuthPassword("")
       setAuthEmail("")
     }
   }, [])
 
+  const register = () => {
+    navigation.navigate("Register")
+  }
+
   const error = isSubmitted ? validationError : ""
 
-  function login() {
+  async function login() {
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
 
@@ -42,12 +46,14 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
     // Make a request to your server to get an authentication token.
     // If successful, reset the fields and set the token.
+    const successLogin = await authenticate(authPassword);
+    console.log("🚀 successLogin", successLogin);
+
+    if (!successLogin) return
+
     setIsSubmitted(false)
     setAuthPassword("")
     setAuthEmail("")
-
-    // We'll mock this with a fake token.
-    setAuthToken(String(Date.now()))
   }
 
   const PasswordRightAccessory: ComponentType<TextFieldAccessoryProps> = useMemo(
@@ -72,6 +78,8 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={["top", "bottom"]}
     >
+      <Text testID="navigate-register-button" tx="loginScreen.register" preset="default" style={$register} onPress={register} />
+
       <Text testID="login-heading" tx="loginScreen.logIn" preset="heading" style={$logIn} />
       <Text tx="loginScreen.enterDetails" preset="subheading" style={$enterDetails} />
       {attemptsCount > 2 && <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />}
@@ -90,7 +98,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         status={error ? "error" : undefined}
         onSubmitEditing={() => authPasswordInput.current?.focus()}
       />
-
       <TextField
         ref={authPasswordInput}
         value={authPassword}
@@ -105,7 +112,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         onSubmitEditing={login}
         RightAccessory={PasswordRightAccessory}
       />
-
       <Button
         testID="login-button"
         tx="loginScreen.tapToLogIn"
@@ -113,6 +119,22 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         preset="reversed"
         onPress={login}
       />
+
+      <Text style={$or} tx="loginScreen.or" preset="bold" />
+      <Button
+        testID="login-google-button"
+        tx="loginScreen.tapToLogInWithGoogle"
+        style={$tapButtonGoogle}
+        preset="reversed"
+        onPress={authenticateWithGoogle}
+      />
+      <Button
+        testID="login-facebook-button"
+        tx="loginScreen.tapToLogInWithFacebook"
+        style={$tapButtonFacebook}
+        preset="reversed"
+      />
+
     </Screen>
   )
 })
@@ -120,6 +142,10 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.xxl,
   paddingHorizontal: spacing.lg,
+}
+
+const $register: TextStyle = {
+  textAlign: "right",
 }
 
 const $logIn: TextStyle = {
@@ -135,10 +161,25 @@ const $hint: TextStyle = {
   marginBottom: spacing.md,
 }
 
+const $or: TextStyle = {
+  marginTop: spacing.lg,
+  marginBottom: spacing.xs,
+}
+
 const $textField: ViewStyle = {
   marginBottom: spacing.lg,
 }
 
 const $tapButton: ViewStyle = {
   marginTop: spacing.xs,
+}
+
+const $tapButtonGoogle: ViewStyle = {
+  marginTop: spacing.xs,
+  backgroundColor: "#DB4437",
+}
+
+const $tapButtonFacebook: ViewStyle = {
+  marginTop: spacing.xs,
+  backgroundColor: "#4267B2",
 }
