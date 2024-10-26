@@ -45,7 +45,7 @@ const rnrImage2 = require("../../../assets/images/demo/rnr-image-2.png")
 const rnrImage3 = require("../../../assets/images/demo/rnr-image-3.png")
 const rnrImages = [rnrImage1, rnrImage2, rnrImage3]
 
-export const OrderServiceScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = observer(
+export const OrderServiceScreen: FC<DemoTabScreenProps<"OrderServicetList">> = observer(
   function OrderServiceScreen(_props) {
     const { orderServiceStore } = useStores()
 
@@ -265,13 +265,13 @@ const EpisodeCard = observer(function EpisodeCard({
       ContentComponent={
         <>
           <Text>
-            {`${episode.parsedTitleAndSubtitle.title}}`}
+            {episode.parsedTitleAndSubtitle.title}
           </Text>
           <Text>
-            {`${episode.subtitle}`}
+            {episode.subtitle}
           </Text>
           <Text
-            text={`${episode.description}`}
+            text={episode.description}
           />
         </>
       }

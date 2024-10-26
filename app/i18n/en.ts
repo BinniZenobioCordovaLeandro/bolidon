@@ -13,6 +13,12 @@ const en = {
     exciting: "¡Esto va a ser emocionante!",
     letsGo: "¡Vamos causa!",
   },
+  CollaboratorWelcomeScreen: {
+    postscript: "Brinda el mejor servicio a tus clientes.",
+    readyForLaunch: "¡Listo para brindar el mejor servicio!",
+    exciting: "¡Esto va a ser emocionante!",
+    letsGo: "¡Vamos causa!",
+  },
   errorScreen: {
     title: "Something went wrong!",
     friendlySubtitle:

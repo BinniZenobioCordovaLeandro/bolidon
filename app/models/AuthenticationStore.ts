@@ -6,11 +6,11 @@ export const AuthenticationStoreModel = types
   .props({
     authToken: types.maybe(types.string),
     authEmail: "",
-    isService: false,
+    isCollaborator: types.optional(types.boolean, false),
   })
   .views((store) => ({
-    get isService() {
-      return !!store.isService
+    get isCollaboratorRole() {
+      return !!store.isCollaborator
     },
     get isAuthenticated() {
       return !!store.authToken
@@ -24,11 +24,11 @@ export const AuthenticationStoreModel = types
     },
   }))
   .actions((store) => ({
-    async authenticate(password: string) {
-      const user = await Auth.signInWithCredential(store.authEmail, password)
-      console.log("authenticate", user);
+    async authenticate() {
+      // const user = await Auth.signInWithCredential(store.authEmail, password)
+      console.log("authenticate");
       // We'll mock this with a fake token.
-      this.setAuthToken(String(Date.now()))
+      this.setAuthToken(String(Date.now()), true)
       return true;
     },
     async authenticateWithGoogle() {
@@ -41,8 +41,9 @@ export const AuthenticationStoreModel = types
       console.log("register", user);
       return !!user
     },
-    setAuthToken(value?: string) {
+    setAuthToken(value?: string, isCollaborator = false) {
       store.authToken = value
+      store.isCollaborator = isCollaborator
     },
     setAuthEmail(value: string) {
       store.authEmail = value.replace(/ /g, "")

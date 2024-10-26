@@ -18,8 +18,9 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import Config from "../config"
 import { useStores } from "../models"
-import { HomeNavigator, DemoTabParamList } from "./HomeNavigator"
+import { HomeNavigator, HomeTabParamList } from "./HomeNavigator"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
+import { CollaboratorNavigator, CollaboratorNavigatorParamList } from "./CollaboratorNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -38,8 +39,10 @@ export type AppStackParamList = {
   Welcome: undefined
   Login: undefined
   Register: undefined
-  Demo: NavigatorScreenParams<DemoTabParamList>
+  Home: NavigatorScreenParams<HomeTabParamList>
+  Collaborator: NavigatorScreenParams<CollaboratorNavigatorParamList>
   // 🔥 Your screens go here
+  CollaboratorWelcome: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -59,7 +62,7 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
   const {
-    authenticationStore: { isAuthenticated },
+    authenticationStore: { isAuthenticated, isCollaboratorRole },
   } = useStores()
 
   return (
@@ -69,9 +72,19 @@ const AppStack = observer(function AppStack() {
     >
       {isAuthenticated ? (
         <>
-          <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
-
-          <Stack.Screen name="Demo" component={HomeNavigator} />
+          {
+            isCollaboratorRole ? (
+              <>
+                <Stack.Screen name="CollaboratorWelcome" component={Screens.CollaboratorWelcomeScreen} />
+                <Stack.Screen name="Collaborator" component={CollaboratorNavigator} />
+              </>
+            ) : (
+              <>
+                <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+                <Stack.Screen name="Home" component={HomeNavigator} />
+              </>
+            )
+          }
         </>
       ) : (
         <>

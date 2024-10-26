@@ -10,32 +10,20 @@ import { OrderServiceScreen } from "../screens/OrderServiceScreen/OrderServiceSc
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 
-export type DemoTabParamList = {
+export type HomeTabParamList = {
   DemoCommunity: undefined
   DemoShowroom: { queryIndex?: string; itemIndex?: string }
   DemoDebug: undefined
-  DemoPodcastList: undefined
+  OrderServicetList: undefined
 }
 
-/**
- * Helper for automatically generating navigation prop types for each route.
- *
- * More info: https://reactnavigation.org/docs/typescript/#organizing-types
- */
-export type DemoTabScreenProps<T extends keyof DemoTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<DemoTabParamList, T>,
+export type DemoTabScreenProps<T extends keyof HomeTabParamList> = CompositeScreenProps<
+  BottomTabScreenProps<HomeTabParamList, T>,
   AppStackScreenProps<keyof AppStackParamList>
 >
 
-const Tab = createBottomTabNavigator<DemoTabParamList>()
+const Tab = createBottomTabNavigator<HomeTabParamList>()
 
-/**
- * This is the main navigator for the demo screens with a bottom tab bar.
- * Each tab is a stack navigator with its own set of screens.
- *
- * More info: https://reactnavigation.org/docs/bottom-tab-navigator/
- * @returns {JSX.Element} The rendered `DemoNavigator`.
- */
 export function HomeNavigator() {
   const { bottom } = useSafeAreaInsets()
 
@@ -74,7 +62,7 @@ export function HomeNavigator() {
       />
 
       <Tab.Screen
-        name="DemoPodcastList"
+        name="OrderServicetList"
         component={OrderServiceScreen}
         options={{
           tabBarAccessibilityLabel: translate("demoNavigator.podcastListTab"),
