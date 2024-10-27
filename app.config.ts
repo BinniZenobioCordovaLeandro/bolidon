@@ -29,5 +29,6 @@ module.exports = ({ config }: ConfigContext): Partial<ExpoConfig> => {
       ...config.ios,
       googleServicesFile: process.env.GOOGLE_SERVICE_INFO,
     },
+    platforms: ["ios", "android", "web"],
   }
 }

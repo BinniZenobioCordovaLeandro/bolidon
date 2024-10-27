@@ -18,7 +18,7 @@ if (__DEV__) {
 }
 import { useFonts } from "expo-font"
 import * as Linking from "expo-linking"
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import Config from "./config"
 import "./i18n"
@@ -29,6 +29,8 @@ import { customFontsToLoad } from "./theme"
 import "./utils/gestureHandler"
 import "./utils/ignoreWarnings"
 import * as storage from "./utils/storage"
+import { registerForPushNotificationsAsync } from "./messaging/notifications"
+import * as Notifications from 'expo-notifications'
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
@@ -69,6 +71,29 @@ function App(props: AppProps) {
     onNavigationStateChange,
     isRestored: isNavigationStateRestored,
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
+
+  const notificationListener = useRef<Notifications.Subscription>();
+  const responseListener = useRef<Notifications.Subscription>();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync()
+      .then(token => console.log("token:", token))
+      .catch((error: any) => console.log("error:", error));
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      console.log("notification:", notification);
+    });
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log("response", response);
+    });
+
+    return () => {
+      notificationListener.current &&
+        Notifications.removeNotificationSubscription(notificationListener.current);
+      responseListener.current &&
+        Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
   const [areFontsLoaded, fontLoadError] = useFonts(customFontsToLoad)
 
