@@ -10,3 +10,4 @@ export * from "./ComponentsScreen/ComponentsScreen"
 export * from "./ErrorScreen/ErrorBoundary"
 // export other screens here
 export * from "./CollaboratorWelcomeScreen"
+export * from "./OrderServiceDetailScreen"

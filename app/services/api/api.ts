@@ -8,7 +8,7 @@
 import { ApiResponse, ApisauceInstance, create } from "apisauce"
 import { ComponentSnapshotIn } from "app/models/Component"
 import Config from "../../config"
-import type { EpisodeSnapshotIn } from "../../models/Episode"
+import type { OrderServiceSnapshotIn } from "../../models/OrderService"
 import type { ApiConfig, ApiFeedResponse } from "./api.types"
 import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
 import componentsMock from "./mocks/components.json"
@@ -48,7 +48,7 @@ export class Api {
   /**
    * Gets a list of recent React Native Radio episodes.
    */
-  async getOrderServices(): Promise<{ kind: "ok"; episodes: EpisodeSnapshotIn[] } | GeneralApiProblem> {
+  async getOrderServices(): Promise<{ kind: "ok"; orderServices: OrderServiceSnapshotIn[] } | GeneralApiProblem> {
     // make the api call
     const response: ApiResponse<ApiFeedResponse> = {
       ok: true,
@@ -69,12 +69,12 @@ export class Api {
       const rawData = orderServicesMock;
 
       // This is where we transform the data into the shape we expect for our MST model.
-      const episodes: EpisodeSnapshotIn[] =
+      const orderServices: OrderServiceSnapshotIn[] =
         rawData?.map((raw) => ({
           ...raw,
         })) ?? []
 
-      return { kind: "ok", episodes }
+      return { kind: "ok", orderServices }
     } catch (e) {
       if (__DEV__ && e instanceof Error) {
         console.error(`Bad data: ${e.message}\n${response.data}`, e.stack)

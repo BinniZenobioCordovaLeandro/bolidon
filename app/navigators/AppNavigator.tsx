@@ -43,6 +43,7 @@ export type AppStackParamList = {
   Collaborator: NavigatorScreenParams<CollaboratorNavigatorParamList>
   // 🔥 Your screens go here
   CollaboratorWelcome: undefined
+  OrderServiceDetail: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -59,6 +60,17 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStack
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<AppStackParamList>()
+
+const generateOptions = (custom: object) => {
+  return {
+    headerShown: true,
+    headerStyle: {
+      backgroundColor: colors.palette.neutral800,
+    },
+    headerTintColor: colors.palette.neutral100,
+    ...custom,
+  }
+}
 
 const AppStack = observer(function AppStack() {
   const {
@@ -89,19 +101,12 @@ const AppStack = observer(function AppStack() {
       ) : (
         <>
           <Stack.Screen name="Login" component={Screens.LoginScreen} />
-          <Stack.Screen name="Register" component={Screens.RegisterScreen} options={
-            {
-              headerShown: true,
-              headerStyle: {
-                backgroundColor: colors.palette.neutral800,
-              },
-              headerTintColor: colors.palette.neutral100,
-            }
-          } />
+          <Stack.Screen name="Register" component={Screens.RegisterScreen} options={generateOptions} />
         </>
       )}
 
       {/** 🔥 Your screens go here */}
+      <Stack.Screen name="OrderServiceDetail" component={Screens.OrderServiceDetailScreen} options={generateOptions} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

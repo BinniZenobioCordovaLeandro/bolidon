@@ -1,4 +1,4 @@
-import { OrderServiceModel } from "./Episode"
+import { OrderServiceModel } from "./OrderService"
 
 const data = {
   guid: "f91f2ea0-378a-4a90-9a83-d438a0cc32f6",

@@ -33,21 +33,27 @@ import {
 } from "../../components"
 import { isRTL, translate } from "../../i18n"
 import { useStores } from "../../models"
-import { Episode } from "../../models/Episode"
+import { OrderService } from "../../models/OrderService"
 import { DemoTabScreenProps } from "../../navigators/HomeNavigator"
 import { colors, spacing } from "../../theme"
 import { delay } from "../../utils/delay"
 
 const ICON_SIZE = 14
 
-const rnrImage1 = require("../../../assets/images/demo/rnr-image-1.png")
-const rnrImage2 = require("../../../assets/images/demo/rnr-image-2.png")
-const rnrImage3 = require("../../../assets/images/demo/rnr-image-3.png")
-const rnrImages = [rnrImage1, rnrImage2, rnrImage3]
-
 export const OrderServiceScreen: FC<DemoTabScreenProps<"OrderServicetList">> = observer(
   function OrderServiceScreen(_props) {
-    const { orderServiceStore } = useStores()
+    const { navigation } = _props
+    const { orderServiceStore: {
+      fetchOrderServices,
+      orderServicesForList,
+      favorites,
+      orderServices: episodes,
+      favoritesOnly,
+      setProp,
+      hasFavorite,
+      toggleFavorite,
+      editOrderService,
+    } } = useStores()
 
     const [refreshing, setRefreshing] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(false)
@@ -56,15 +62,15 @@ export const OrderServiceScreen: FC<DemoTabScreenProps<"OrderServicetList">> = o
     useEffect(() => {
       ; (async function load() {
         setIsLoading(true)
-        await orderServiceStore.fetchOrderServices()
+        await fetchOrderServices()
         setIsLoading(false)
       })()
-    }, [orderServiceStore])
+    }, [])
 
     // simulate a longer refresh, if the refresh is too fast for UX
     async function manualRefresh() {
       setRefreshing(true)
-      await Promise.all([orderServiceStore.fetchOrderServices(), delay(3750)])
+      await Promise.all([fetchOrderServices(), delay(3750)])
       setRefreshing(false)
     }
 
@@ -74,10 +80,10 @@ export const OrderServiceScreen: FC<DemoTabScreenProps<"OrderServicetList">> = o
         safeAreaEdges={["top"]}
         contentContainerStyle={$screenContentContainer}
       >
-        <ListView<Episode>
+        <ListView<OrderService>
           contentContainerStyle={$listContentContainer}
-          data={orderServiceStore.orderServicesForList.slice()}
-          extraData={orderServiceStore.favorites.length + orderServiceStore.episodes.length}
+          data={orderServicesForList.slice()}
+          extraData={favorites.length + episodes.length}
           refreshing={refreshing}
           estimatedItemSize={177}
           onRefresh={manualRefresh}
@@ -89,16 +95,16 @@ export const OrderServiceScreen: FC<DemoTabScreenProps<"OrderServicetList">> = o
                 preset="generic"
                 style={$emptyState}
                 headingTx={
-                  orderServiceStore.favoritesOnly
+                  favoritesOnly
                     ? "demoPodcastListScreen.noFavoritesEmptyState.heading"
                     : undefined
                 }
                 contentTx={
-                  orderServiceStore.favoritesOnly
+                  favoritesOnly
                     ? "demoPodcastListScreen.noFavoritesEmptyState.content"
                     : undefined
                 }
-                button={orderServiceStore.favoritesOnly ? "" : undefined}
+                button={favoritesOnly ? "" : undefined}
                 buttonOnPress={manualRefresh}
                 imageStyle={$emptyStateImage}
                 ImageProps={{ resizeMode: "contain" }}
@@ -108,12 +114,12 @@ export const OrderServiceScreen: FC<DemoTabScreenProps<"OrderServicetList">> = o
           ListHeaderComponent={
             <View style={$heading}>
               <Text preset="heading" tx="demoPodcastListScreen.title" />
-              {(orderServiceStore.favoritesOnly || orderServiceStore.orderServicesForList.length > 0) && (
+              {(favoritesOnly || orderServicesForList.length > 0) && (
                 <View style={$toggle}>
                   <Toggle
-                    value={orderServiceStore.favoritesOnly}
+                    value={favoritesOnly}
                     onValueChange={() =>
-                      orderServiceStore.setProp("favoritesOnly", !orderServiceStore.favoritesOnly)
+                      setProp("favoritesOnly", !favoritesOnly)
                     }
                     variant="switch"
                     labelTx="demoPodcastListScreen.onlyFavorites"
@@ -128,8 +134,12 @@ export const OrderServiceScreen: FC<DemoTabScreenProps<"OrderServicetList">> = o
           renderItem={({ item }) => (
             <EpisodeCard
               episode={item}
-              isFavorite={orderServiceStore.hasFavorite(item)}
-              onPressFavorite={() => orderServiceStore.toggleFavorite(item)}
+              isFavorite={hasFavorite(item)}
+              onPressFavorite={() => toggleFavorite(item)}
+              onPressItem={() => {
+                editOrderService(item);
+                navigation.navigate("OrderServiceDetail");
+              }}
             />
           )}
         />
@@ -142,16 +152,18 @@ const EpisodeCard = observer(function EpisodeCard({
   episode,
   isFavorite,
   onPressFavorite,
+  onPressItem,
 }: {
-  episode: Episode
-  onPressFavorite: () => void
+  episode: OrderService
   isFavorite: boolean
+  onPressFavorite: () => void
+  onPressItem: () => void
 }) {
   const liked = useSharedValue(isFavorite ? 1 : 0)
 
   const imageUri = useMemo<ImageSourcePropType>(() => {
-    return rnrImages[Math.floor(Math.random() * rnrImages.length)]
-  }, [])
+    return { uri: episode.thumbnail };
+  }, [episode.thumbnail])
 
   // Grey heart
   const animatedLikeButtonStyles = useAnimatedStyle(() => {
@@ -214,8 +226,7 @@ const EpisodeCard = observer(function EpisodeCard({
   }
 
   const handlePressCard = () => {
-    // sent to page detail
-    // openLinkInBrowser(episode.enclosure.link)
+    onPressItem();
   }
 
   const ButtonLeftAccessory: ComponentType<ButtonAccessoryProps> = useMemo(

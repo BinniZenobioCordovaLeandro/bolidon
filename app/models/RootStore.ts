@@ -1,7 +1,7 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { AuthenticationStoreModel } from "./AuthenticationStore"
 import { ComponentStoreModel } from "./ComponentStore"
-import { OrderServiceStoreModel } from "./EpisodeStore"
+import { OrderServiceStoreModel } from "./OrderServiceStore"
 
 /**
  * A RootStore model.
