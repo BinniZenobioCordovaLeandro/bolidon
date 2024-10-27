@@ -21,5 +21,13 @@ module.exports = ({ config }: ConfigContext): Partial<ExpoConfig> => {
       ...existingPlugins,
       require("./plugins/withSplashScreen").withSplashScreen,
     ],
+    android: {
+      ...config.android,
+      googleServicesFile: process.env.GOOGLE_SERVICES,
+    },
+    ios: {
+      ...config.ios,
+      googleServicesFile: process.env.GOOGLE_SERVICE_INFO,
+    },
   }
 }
