@@ -1,19 +1,25 @@
-import React from "react"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { translate } from "../i18n"
-import { TextStyle, ViewStyle } from "react-native"
-import { colors, spacing, typography } from "app/theme"
-import { OrderServiceScreen } from "app/screens/OrderServiceScreen/OrderServiceScreen"
+import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { CompositeScreenProps } from "@react-navigation/native"
 import { Icon } from "app/components"
+import { ProfileScreen, VehiclesScreen } from "app/screens"
+import { OrderServiceScreen } from "app/screens/OrderServiceScreen/OrderServiceScreen"
+import { colors, spacing, typography } from "app/theme"
+import React from "react"
+import { TextStyle, ViewStyle } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { translate } from "../i18n"
+import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 
 export type CollaboratorTabParamList = {
   OrderServicetList: undefined
+  Vehicles: undefined
+  Profile: undefined
 }
 
-export type CollaboratorNavigatorParamList = {
-  OrderServicetList: undefined
-}
+export type CollaboratorTabScreenProps<T extends keyof CollaboratorTabParamList> = CompositeScreenProps<
+  BottomTabScreenProps<CollaboratorTabParamList, T>,
+  AppStackScreenProps<keyof AppStackParamList>
+>
 
 const Tab = createBottomTabNavigator<CollaboratorTabParamList>()
 
@@ -33,13 +39,35 @@ export const CollaboratorNavigator = () => {
       }}
     >
       <Tab.Screen
+        name="Vehicles"
+        component={VehiclesScreen}
+        options={{
+          tabBarAccessibilityLabel: translate("collaboratorNavigator.vehiclesTab"),
+          tabBarLabel: translate("collaboratorNavigator.vehiclesTab"),
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="caretLeft" color={focused ? colors.tint : undefined} size={30} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="OrderServicetList"
         component={OrderServiceScreen}
         options={{
-          tabBarAccessibilityLabel: translate("demoNavigator.podcastListTab"),
-          tabBarLabel: translate("demoNavigator.podcastListTab"),
+          tabBarAccessibilityLabel: translate("collaboratorNavigator.podcastListTab"),
+          tabBarLabel: translate("collaboratorNavigator.podcastListTab"),
           tabBarIcon: ({ focused }) => (
             <Icon icon="podcast" color={focused ? colors.tint : undefined} size={30} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarAccessibilityLabel: translate("collaboratorNavigator.profileTab"),
+          tabBarLabel: translate("collaboratorNavigator.profileTab"),
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="lock" color={focused ? colors.tint : undefined} size={30} />
           ),
         }}
       />

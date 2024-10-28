@@ -5,19 +5,19 @@ import { TextStyle, ViewStyle } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Icon } from "../components"
 import { translate } from "../i18n"
-import { HomeScreen, ComponentsScreen, ProfileScreen } from "../screens"
+import { ComponentsScreen, HomeScreen, ProfileScreen } from "../screens"
 import { OrderServiceScreen } from "../screens/OrderServiceScreen/OrderServiceScreen"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 
 export type HomeTabParamList = {
-  DemoCommunity: undefined
-  DemoShowroom: { queryIndex?: string; itemIndex?: string }
-  DemoDebug: undefined
+  Home: undefined
+  Components: { queryIndex?: string; itemIndex?: string }
   OrderServicetList: undefined
+  Profile: undefined
 }
 
-export type DemoTabScreenProps<T extends keyof HomeTabParamList> = CompositeScreenProps<
+export type HomeTabScreenProps<T extends keyof HomeTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<HomeTabParamList, T>,
   AppStackScreenProps<keyof AppStackParamList>
 >
@@ -40,7 +40,7 @@ export function HomeNavigator() {
       }}
     >
       <Tab.Screen
-        name="DemoCommunity"
+        name="Home"
         component={HomeScreen}
         options={{
           tabBarLabel: translate("demoNavigator.HomeTab"),
@@ -51,7 +51,7 @@ export function HomeNavigator() {
       />
 
       <Tab.Screen
-        name="DemoShowroom"
+        name="Components"
         component={ComponentsScreen}
         options={{
           tabBarLabel: translate("demoNavigator.componentsTab"),
@@ -74,7 +74,7 @@ export function HomeNavigator() {
       />
 
       <Tab.Screen
-        name="DemoDebug"
+        name="Profile"
         component={ProfileScreen}
         options={{
           tabBarLabel: translate("demoNavigator.debugTab"),

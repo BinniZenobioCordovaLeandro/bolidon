@@ -57,6 +57,12 @@ export const ComponentModel = types
         return ""
       }
     },
+    get priorityLevelColor() {
+      if (component.priorityLevel === "high") return "red"
+      if (component.priorityLevel === "medium") return "yellow"
+      if (component.priorityLevel === "low") return "green"
+      return "grey"
+    },
   }))
 
 export interface Component extends Instance<typeof ComponentModel> { }

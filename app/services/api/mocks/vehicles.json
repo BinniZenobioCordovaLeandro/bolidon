@@ -1,0 +1,32 @@
+[
+    {
+        "guid": "1",
+        "plate": "ABC-123",
+        "brand": "Chevrolet",
+        "model": "Camaro",
+        "year": 2003,
+        "color": "Red",
+        "kilometers": 68000,
+        "engine": "4.0L V6",
+        "transmission": "Automatic",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
+    },
+    {
+        "guid": "2",
+        "plate": "DEF-456",
+        "brand": "Chevrolet",
+        "model": "Camaro",
+        "year": 2019,
+        "color": "Black",
+        "kilometers": 25000,
+        "engine": "6.2L V8",
+        "transmission": "Manual",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
+    }
+]

@@ -1,10 +1,10 @@
 import React, { FC } from "react"
 import { Linking, TextStyle, View, ViewStyle } from "react-native"
 import { Button, Screen, Text } from "../../components"
-import { DemoTabScreenProps } from "../../navigators/HomeNavigator"
-import { colors, spacing } from "../../theme"
 import { isRTL } from "../../i18n"
 import { useStores } from "../../models"
+import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
+import { colors, spacing } from "../../theme"
 
 /**
  * @param {string} url - The URL to open in the browser.
@@ -14,7 +14,7 @@ function openLinkInBrowser(url: string) {
   Linking.canOpenURL(url).then((canOpen) => canOpen && Linking.openURL(url))
 }
 
-export const ProfileScreen: FC<DemoTabScreenProps<"DemoDebug">> = function ProfileScreen(
+export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function ProfileScreen(
   _props,
 ) {
   const {

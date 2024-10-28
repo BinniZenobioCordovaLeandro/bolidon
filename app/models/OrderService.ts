@@ -1,8 +1,8 @@
 import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree"
-import { withSetPropAction } from "./helpers/withSetPropAction"
-import { formatDate } from "../utils/formatDate"
 import { translate } from "../i18n"
+import { formatDate } from "../utils/formatDate"
 import { ComponentModel } from "./Component"
+import { withSetPropAction } from "./helpers/withSetPropAction"
 
 
 /**
@@ -50,6 +50,7 @@ export const OrderServiceModel = types
     },
   }))
 
-export interface OrderService extends Instance<typeof OrderServiceModel> {}
-export interface OrderServiceSnapshotOut extends SnapshotOut<typeof OrderServiceModel> {}
-export interface OrderServiceSnapshotIn extends SnapshotIn<typeof OrderServiceModel> {}
+export interface OrderService extends Instance<typeof OrderServiceModel> { }
+export interface OrderServiceSnapshotOut extends SnapshotOut<typeof OrderServiceModel> { }
+export interface OrderServiceSnapshotIn extends SnapshotIn<typeof OrderServiceModel> { }
+export const createOrderServiceDefaultModel = () => types.optional(OrderServiceModel, {})

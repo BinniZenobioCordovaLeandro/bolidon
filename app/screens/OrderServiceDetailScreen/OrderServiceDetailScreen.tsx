@@ -1,18 +1,16 @@
-import React, { FC } from "react"
-import { observer } from "mobx-react-lite"
-import { ViewStyle, View, Image, ImageStyle } from "react-native"
-import { AppStackScreenProps } from "app/navigators"
 import { Screen, Text } from "app/components"
 import { useStores } from "app/models"
-import { spacing } from "app/theme"
-// import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "app/models"
+import { AppStackScreenProps } from "app/navigators"
+import { observer } from "mobx-react-lite"
+import React, { FC } from "react"
+import { Image, View } from "react-native"
+import { $container, $image, $imageContainer, $root, $row, $section } from "../styles"
 
 interface OrderServiceDetailScreenProps extends AppStackScreenProps<"OrderServiceDetail"> { }
 
 export const OrderServiceDetailScreen: FC<OrderServiceDetailScreenProps> = observer(function OrderServiceDetailScreen() {
   const { orderServiceStore: {
-    orderService
+    selectedOrderService: orderService
   } } = useStores()
 
   return (
@@ -25,10 +23,12 @@ export const OrderServiceDetailScreen: FC<OrderServiceDetailScreenProps> = obser
           <Text preset="default" text={orderService?.description} />
         </View>
         <View style={$section}>
+          <Text preset="subheading" text="Componentes para cambio" />
           {
             orderService?.components.map((item, index) => (
-              <View key={index}>
-                <Text>{item.component} {item.urgencyLevel}</Text>
+              <View key={index} style={$row}>
+                <Text>{item.component}</Text>
+                <View style={{ width: 20, height: 20, borderRadius: 20, backgroundColor: item.priorityLevelColor }} />
               </View>
             ))
           }
@@ -49,29 +49,3 @@ export const OrderServiceDetailScreen: FC<OrderServiceDetailScreenProps> = obser
     </Screen >
   )
 })
-
-const $root: ViewStyle = {
-  flex: 1,
-}
-
-const $container: ViewStyle = {
-  paddingHorizontal: spacing.lg,
-}
-
-const $section: ViewStyle = {
-  marginTop: spacing.md,
-  marginBottom: spacing.md,
-}
-
-const $imageContainer: ViewStyle = {
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  justifyContent: 'space-between',
-  alignContent: 'space-between',
-}
-
-const $image: ImageStyle = {
-  width: 200,
-  height: 200,
-  marginBottom: spacing.sm,
-}

@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import * as Application from "expo-application"
 import { Linking, Platform, TextStyle, View, ViewStyle } from "react-native"
 import { Button, ListItem, Screen, Text } from "../../components"
-import { DemoTabScreenProps } from "../../navigators/HomeNavigator"
+import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
 import { colors, spacing } from "../../theme"
 import { isRTL } from "../../i18n"
 
@@ -14,7 +14,7 @@ function openLinkInBrowser(url: string) {
   Linking.canOpenURL(url).then((canOpen) => canOpen && Linking.openURL(url))
 }
 
-export const ProfileScreen: FC<DemoTabScreenProps<"DemoDebug">> = function ProfileScreen(
+export const ProfileScreen: FC<HomeTabScreenProps<"DemoDebug">> = function ProfileScreen(
   _props,
 ) {
 

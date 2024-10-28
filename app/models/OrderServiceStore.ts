@@ -6,7 +6,7 @@ import { withSetPropAction } from "./helpers/withSetPropAction"
 export const OrderServiceStoreModel = types
   .model("OrderServiceStore")
   .props({
-    orderService: types.safeReference(OrderServiceModel),
+    selectedOrderService: types.safeReference(OrderServiceModel),
     orderServices: types.array(OrderServiceModel),
     favorites: types.array(types.reference(OrderServiceModel)),
     favoritesOnly: false,
@@ -28,7 +28,7 @@ export const OrderServiceStoreModel = types
       store.favorites.remove(orderService)
     },
     fetchOrderService(orderService: OrderService) {
-      store.orderService = orderService
+      store.selectedOrderService = orderService
     }
   }))
   .views((store) => ({

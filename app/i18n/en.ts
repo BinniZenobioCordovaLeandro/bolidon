@@ -46,7 +46,7 @@ const en = {
     emailFieldPlaceholder: "Ingresa tu correo",
     passwordFieldPlaceholder: "Ingresa tu contraseña",
     tapToLogIn: "Ingresar",
-    or : "tamien puedes usar tus redes sociales:",
+    or: "tamien puedes usar tus redes sociales:",
     tapToLogInWithGoogle: "Ingresar con Google",
     tapToLogInWithFacebook: "Ingresar con Facebook",
     hint: "Puedes usar tu correo y contraseña o tus redes sociales para ingresar.",
@@ -69,6 +69,11 @@ const en = {
     debugTab: "Perfil",
     podcastListTab: "Ordenes de Servicio",
   },
+  collaboratorNavigator: {
+    podcastListTab: "Ordenes de Servicio",
+    vehiclesTab: "Vehiculos",
+    profileTab: "Perfil",
+  },
   HomeScreen: {
     title: "Tu vehiculo es un BOLIDON",
     tagLine:
@@ -78,6 +83,29 @@ const en = {
   },
   ComponentsScreen: {
     jumpStart: "Tus componentes",
+  },
+  VehiclesScreen: {
+    title: "Vehiculos",
+    selectVehicle: "Selecciona tu vehiculo",
+    noVehicles: "No tienes vehiculos registrados",
+    addVehicle: "Agregar vehiculo",
+    addVehicleHint: "Agrega un vehiculo para comenzar a disfrutar de los servicios de Bolidon.",
+    onlyFavorites: "Mostrar solo favoritos",
+    accessibility: {
+      cardHint:
+        "Double tap to listen to the episode. Double tap and hold to {{action}} this episode.",
+      switch: "Switch on to only show favorites",
+      favoriteAction: "Toggle Favorite",
+      favoriteIcon: "Episode not favorited",
+      unfavoriteIcon: "Episode favorited",
+      publishLabel: "Published {{date}}",
+      durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
+    },
+    noFavoritesEmptyState: {
+      heading: "This looks a bit empty",
+      content:
+        "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
+    },
   },
   ProfileScreen: {
     title: "Perfil",
@@ -105,7 +133,7 @@ const en = {
   },
   demoPodcastListScreen: {
     title: "Ordenes de Servicio",
-    onlyFavorites: "Only Show Favorites",
+    onlyFavorites: "Mostrar solo favoritos",
     favoriteButton: "Favorite",
     unfavoriteButton: "Unfavorite",
     accessibility: {

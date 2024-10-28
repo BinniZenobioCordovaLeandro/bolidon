@@ -13,7 +13,7 @@ import {
 } from "react-native"
 import { ListItem, Screen, Text } from "../../components"
 import { TxKeyPath, isRTL } from "../../i18n"
-import { DemoTabScreenProps } from "../../navigators/HomeNavigator"
+import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
 import { spacing } from "../../theme"
 
 const reactNativeLiveLogo = require("../../../assets/images/demo/rnl-logo.png")
@@ -24,7 +24,7 @@ export interface Demo {
   data: ReactElement[]
 }
 
-export const ComponentsScreen: FC<DemoTabScreenProps<"DemoShowroom">> = function ComponentsScreen(
+export const ComponentsScreen: FC<HomeTabScreenProps<"Components">> = function ComponentsScreen(
   _props,
 ) {
   const listRef = React.useRef<SectionList>(null)
@@ -35,7 +35,7 @@ export const ComponentsScreen: FC<DemoTabScreenProps<"DemoShowroom">> = function
   const [isLoading, setIsLoading] = React.useState(false)
 
   useEffect(() => {
-    ;(async function load() {
+    ; (async function load() {
       setIsLoading(true)
       await componentStore.fetchComponents()
       setIsLoading(false)

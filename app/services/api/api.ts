@@ -13,6 +13,8 @@ import type { ApiConfig, ApiFeedResponse } from "./api.types"
 import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
 import componentsMock from "./mocks/components.json"
 import orderServicesMock from "./mocks/orderServices.json"
+import vehiclesMock from "./mocks/vehicles.json"
+import { VehicleSnapshotIn } from "app/models"
 
 
 /**
@@ -43,6 +45,18 @@ export class Api {
         Accept: "application/json",
       },
     })
+  }
+
+  async getVehicles(): Promise<{ kind: "ok"; vehicles: VehicleSnapshotIn[] } | GeneralApiProblem> {
+    try {
+      const vehicles: VehicleSnapshotIn[] = vehiclesMock as VehicleSnapshotIn[];
+
+      console.log("🚗 vehicles", vehicles);
+
+      return { kind: "ok", vehicles }
+    } catch {
+      return { kind: "bad-data" }
+    }
   }
 
   /**
