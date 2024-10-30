@@ -13,9 +13,17 @@ export const Auth = {
     signInWithCredential: async (email: string, password: string) => {
         try {
             // const credential = auth.signInWithEmailAndPassword(email, password);
-            const credential = "";
-            console.log("signInWithCredential", credential, email, password);
-            return credential;
+            if (email === "" || password === "") return;
+            if (email === "service@gmail.com" && password === "service")
+                return {
+                    token: "service",
+                    user: { email, isCollaborator: true },
+                };
+            if (email === "client@gmail.com" && password === "client")
+                return {
+                    token: "client",
+                    user: { email, isCollaborator: false },
+                };
         } catch (error) {
             console.error(error);
         }
