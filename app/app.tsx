@@ -18,10 +18,12 @@ if (__DEV__) {
 }
 import { useFonts } from "expo-font"
 import * as Linking from "expo-linking"
+import * as Notifications from 'expo-notifications'
 import React, { useEffect, useRef } from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import Config from "./config"
 import "./i18n"
+import { registerForPushNotificationsAsync } from "./messaging/notifications"
 import { useInitialRootStore } from "./models"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { ErrorBoundary } from "./screens/ErrorScreen/ErrorBoundary"
@@ -29,8 +31,6 @@ import { customFontsToLoad } from "./theme"
 import "./utils/gestureHandler"
 import "./utils/ignoreWarnings"
 import * as storage from "./utils/storage"
-import { registerForPushNotificationsAsync } from "./messaging/notifications"
-import * as Notifications from 'expo-notifications'
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
@@ -76,6 +76,7 @@ function App(props: AppProps) {
   const responseListener = useRef<Notifications.Subscription>();
 
   useEffect(() => {
+    console.log("🎸 registering for push notifications");
     registerForPushNotificationsAsync()
       .then(token => console.log("token:", token))
       .catch((error: any) => console.log("error:", error));

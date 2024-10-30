@@ -5,6 +5,8 @@ import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "
 import { useStores } from "../../models"
 import { AppStackScreenProps } from "../../navigators"
 import { colors, spacing } from "../../theme"
+import { FacebookSignIn } from "./components/FacebookSignIn"
+import { GoogleSignIn } from "./components/GoogleSignIn"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> { }
 
@@ -18,7 +20,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attemptsCount, setAttemptsCount] = useState(0)
   const {
-    authenticationStore: { authEmail, setAuthEmail, validationError, authenticate, authenticateWithGoogle },
+    authenticationStore: { authEmail, setAuthEmail, validationError, authenticate },
   } = useStores()
 
   useEffect(() => {
@@ -121,20 +123,8 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       />
 
       <Text style={$or} tx="loginScreen.or" preset="bold" />
-      <Button
-        testID="login-google-button"
-        tx="loginScreen.tapToLogInWithGoogle"
-        style={$tapButtonGoogle}
-        preset="reversed"
-        onPress={authenticateWithGoogle}
-      />
-      <Button
-        testID="login-facebook-button"
-        tx="loginScreen.tapToLogInWithFacebook"
-        style={$tapButtonFacebook}
-        preset="reversed"
-      />
-
+      <GoogleSignIn />
+      <FacebookSignIn />
     </Screen>
   )
 })
@@ -172,14 +162,4 @@ const $textField: ViewStyle = {
 
 const $tapButton: ViewStyle = {
   marginTop: spacing.xs,
-}
-
-const $tapButtonGoogle: ViewStyle = {
-  marginTop: spacing.xs,
-  backgroundColor: "#DB4437",
-}
-
-const $tapButtonFacebook: ViewStyle = {
-  marginTop: spacing.xs,
-  backgroundColor: "#4267B2",
 }

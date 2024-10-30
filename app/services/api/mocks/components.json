@@ -36,5 +36,24 @@
     ],
     "diyGuideLink": "https://www.example.com/diy-engine-air-filter",
     "notes": "Replace engine air filter based on environment."
+  },
+  {
+    "service": "Motor",
+    "component": "Faja de distribucion",
+    "updatedAt": "2024-10-14 21:08:01",
+    "frequencyMiles": 60000.0,
+    "milesToService": 5000.0,
+    "lastServiceMiles": 50000.0,
+    "estimatedDueDate": "2024-10-14 21:08:01",
+    "urgencyLevel": "medium",
+    "priorityLevel": "medium",
+    "costEstimate": 300.0,
+    "serviceLocation": "Local Auto Repair Shop",
+    "recommendedServiceProviders": [
+      "QuickLube",
+      "SpeedyOil"
+    ],
+    "diyGuideLink": "https://www.example.com/diy-oil-change",
+    "notes": "Frequency depends on oil type and driving conditions."
   }
 ]

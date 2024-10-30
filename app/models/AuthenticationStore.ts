@@ -24,17 +24,17 @@ export const AuthenticationStoreModel = types
     },
   }))
   .actions((store) => ({
-    async authenticate() {
-      // const user = await Auth.signInWithCredential(store.authEmail, password)
-      console.log("authenticate");
+    async authenticate(password: string) {
+      const token = await Auth.signInWithCredential(store.authEmail, password)
+      console.log("authenticate", token);
       // We'll mock this with a fake token.
       this.setAuthToken(String(Date.now()), true)
       return true;
     },
-    async authenticateWithGoogle() {
-      const token = await Auth.signInWithGoogle();
-      console.log("token", token);
-      this.setAuthToken("token");
+    async authenticateWithGoogle(token: string) {
+      const user = await Auth.signInWithGoogle(token);
+      console.log("token", token, user);
+      this.setAuthToken(token);
     },
     async register(password: string) {
       const user = await Auth.registerCredential(store.authEmail, password);

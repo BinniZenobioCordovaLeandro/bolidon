@@ -11,6 +11,7 @@ const reactNativeLiveLogo = require("../../../assets/images/demo/rnl-logo.png")
 const reactNativeNewsletterLogo = require("../../../assets/images/demo/rnn-logo.png")
 
 export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_props) {
+  const { navigation } = _props
   return (
     <Screen preset="scroll" contentContainerStyle={$container} safeAreaEdges={["top"]}>
       <Text preset="heading" tx="HomeScreen.title" style={$title} />
@@ -38,7 +39,7 @@ export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_p
             <Image source={reactNativeLiveLogo} style={$logo} />
           </View>
         }
-        onPress={() => openLinkInBrowser("")}
+        onPress={() => navigation.navigate("OrderServicetList")}
       />
     </Screen>
   )

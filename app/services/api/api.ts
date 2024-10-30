@@ -6,6 +6,7 @@
  * documentation for more details.
  */
 import { ApiResponse, ApisauceInstance, create } from "apisauce"
+import { VehicleSnapshotIn } from "app/models"
 import { ComponentSnapshotIn } from "app/models/Component"
 import Config from "../../config"
 import type { OrderServiceSnapshotIn } from "../../models/OrderService"
@@ -14,7 +15,6 @@ import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
 import componentsMock from "./mocks/components.json"
 import orderServicesMock from "./mocks/orderServices.json"
 import vehiclesMock from "./mocks/vehicles.json"
-import { VehicleSnapshotIn } from "app/models"
 
 
 /**

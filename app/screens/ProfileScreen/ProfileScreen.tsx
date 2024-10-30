@@ -25,8 +25,8 @@ export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function Profile
     <Screen preset="scroll" safeAreaEdges={["top"]} contentContainerStyle={$container}>
       <Text
         style={$reportBugsLink}
-        tx="ProfileScreen.reportBugs"
-        onPress={() => openLinkInBrowser("")}
+        tx="ProfileScreen.suggestFeature"
+        onPress={() => openLinkInBrowser("https://docs.google.com/forms/d/e/1FAIpQLSeVlMhXwz7OFjQRov5UAevUXCECQlX_XoJ8G-XKxq5STC_-9Q/viewform?usp=sf_link")}
       />
       <Text style={$title} preset="heading" tx="ProfileScreen.title" />
       <Text text={authEmail} preset="subheading" />

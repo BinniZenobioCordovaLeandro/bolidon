@@ -18,9 +18,9 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import Config from "../config"
 import { useStores } from "../models"
+import { CollaboratorNavigator, CollaboratorNavigatorParamList } from "./CollaboratorNavigator"
 import { HomeNavigator, HomeTabParamList } from "./HomeNavigator"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
-import { CollaboratorNavigator, CollaboratorNavigatorParamList } from "./CollaboratorNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -45,7 +45,7 @@ export type AppStackParamList = {
   CollaboratorWelcome: undefined
   OrderServiceDetail: undefined
   Vehicles: undefined
-	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -109,7 +109,7 @@ const AppStack = observer(function AppStack() {
       {/** 🔥 Your screens go here */}
       <Stack.Screen name="OrderServiceDetail" component={Screens.OrderServiceDetailScreen} options={generateOptions} />
       <Stack.Screen name="Vehicles" component={Screens.VehiclesScreen} />
-			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

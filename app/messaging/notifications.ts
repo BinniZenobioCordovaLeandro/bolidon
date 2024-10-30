@@ -1,7 +1,7 @@
-import { Platform } from 'react-native';
+import Constants from 'expo-constants';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
-import Constants from 'expo-constants';
+import { Platform } from 'react-native';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -37,6 +37,7 @@ function handleRegistrationError(errorMessage: string) {
 }
 
 export const registerForPushNotificationsAsync = async () => {
+  if (Platform.OS === "web") return;
   if (Platform.OS === 'android') {
     Notifications.setNotificationChannelAsync('default', {
       name: 'default',

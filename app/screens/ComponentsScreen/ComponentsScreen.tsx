@@ -48,8 +48,6 @@ export const ComponentsScreen: FC<HomeTabScreenProps<"Components">> = function C
     setRefreshing(false)
   }
 
-  console.log("🚀 componentStore.components", componentStore.components)
-
   return (
     <Screen preset="scroll" safeAreaEdges={["top"]} contentContainerStyle={$screenContainer}>
       <SectionList
@@ -62,7 +60,7 @@ export const ComponentsScreen: FC<HomeTabScreenProps<"Components">> = function C
           {
             name: new Date().toLocaleDateString(),
             description: "Proximos cambios",
-            subtitle: "Estamos a menos de 500 km para realizar estos cambios",
+            subtitle: `Estamos a menos de 500 km para realizar estos ${componentStore.components.length} cambios`,
             data: [...componentStore.components],
           },
         ]}

@@ -110,6 +110,7 @@ const en = {
   ProfileScreen: {
     title: "Perfil",
     reportBugs: "Reportar errores",
+    suggestFeature: "Enviar Sugerencias",
   },
   demoDebugScreen: {
     howTo: "HOW TO",

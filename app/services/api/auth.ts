@@ -1,11 +1,10 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { auth } from 'app/config/firebase';
+import { googleAuth } from "./auth/google";
 
 export const Auth = {
     registerCredential: async (email: string, password: string) => {
         try {
-            const credential = auth.createUserWithEmailAndPassword(email, password);
-            console.log("registerCredential", credential);
+            const credential = await (() => "registerCredential")();
+            console.log("registerCredential", credential, email, password);
             return credential;
         } catch (error) {
             console.error(error);
@@ -13,28 +12,28 @@ export const Auth = {
     },
     signInWithCredential: async (email: string, password: string) => {
         try {
-            const credential = auth.signInWithEmailAndPassword(email, password);
-            console.log("signInWithCredential", credential);
+            // const credential = auth.signInWithEmailAndPassword(email, password);
+            const credential = "";
+            console.log("signInWithCredential", credential, email, password);
             return credential;
         } catch (error) {
             console.error(error);
         }
     },
-    signInWithGoogle: async () => {
+    signInWithGoogle: async (token: string) => {
         try {
-            await GoogleSignin.hasPlayServices();
-            const { idToken } = await GoogleSignin.signIn();
-            const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-            const credential = auth.signInWithCredential(googleCredential);
-            console.log("signInWithGoogle", credential);
-            return credential;
+            const { user } = await googleAuth.getUserInfoGoogle(token);
+            console.log("signInWithGoogle", user);
+            return {
+                token,
+                user,
+            };
         } catch (error) {
             console.error(error);
         }
     },
     signOut: async () => {
         try {
-            await auth.signOut();
             console.log("signOut");
         } catch (error) {
             console.error(error);
