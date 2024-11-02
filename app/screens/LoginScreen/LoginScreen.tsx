@@ -5,6 +5,7 @@ import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "
 import { useStores } from "../../models"
 import { AppStackScreenProps } from "../../navigators"
 import { colors, spacing } from "../../theme"
+import { $tapButton, $textField } from "../styles"
 import { FacebookSignIn } from "./components/FacebookSignIn"
 import { GoogleSignIn } from "./components/GoogleSignIn"
 
@@ -154,12 +155,4 @@ const $hint: TextStyle = {
 const $or: TextStyle = {
   marginTop: spacing.lg,
   marginBottom: spacing.xs,
-}
-
-const $textField: ViewStyle = {
-  marginBottom: spacing.lg,
-}
-
-const $tapButton: ViewStyle = {
-  marginTop: spacing.xs,
 }

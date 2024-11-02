@@ -45,6 +45,7 @@ export type AppStackParamList = {
   CollaboratorWelcome: undefined
   OrderServiceDetail: undefined
   Vehicles: undefined
+  NewVehicle: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -109,6 +110,7 @@ const AppStack = observer(function AppStack() {
       {/** 🔥 Your screens go here */}
       <Stack.Screen name="OrderServiceDetail" component={Screens.OrderServiceDetailScreen} options={generateOptions} />
       <Stack.Screen name="Vehicles" component={Screens.VehiclesScreen} />
+      <Stack.Screen name="NewVehicle" component={Screens.NewVehicleScreen} options={generateOptions} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

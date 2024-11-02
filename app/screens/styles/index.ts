@@ -36,6 +36,10 @@ export const $heading: ViewStyle = {
   marginBottom: spacing.md,
 }
 
+export const $title: TextStyle = {
+  marginBottom: spacing.xxl,
+}
+
 export const $toggle: ViewStyle = {
   marginTop: spacing.md,
 }
@@ -63,4 +67,19 @@ export const $image: ImageStyle = {
   width: 200,
   height: 200,
   marginBottom: spacing.sm,
+}
+
+export const $textField: ViewStyle = {
+  marginBottom: spacing.lg,
+}
+
+export const $tapButton: ViewStyle = {
+  marginTop: spacing.xs,
+}
+
+export const $wrap: ViewStyle = {
+  flexWrap: 'wrap',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignContent: 'space-between',
 }

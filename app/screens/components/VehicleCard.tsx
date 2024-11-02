@@ -162,7 +162,7 @@ export const VehicleCard = observer(function EpisodeCard({
                         {vehicle.parsedTitle}
                     </Text>
                     <Text>
-                        {vehicle.kilometers}
+                        {vehicle.kilometers} km
                     </Text>
                 </>
             }
@@ -206,6 +206,8 @@ const $item: ViewStyle = {
 }
 
 const $itemThumbnail: ImageStyle = {
+    height: "100%",
+    width: "50%",
     marginTop: spacing.sm,
     borderRadius: 50,
     alignSelf: "flex-start",

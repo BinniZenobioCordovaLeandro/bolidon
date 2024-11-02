@@ -1,5 +1,18 @@
-import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree"
-import { withSetPropAction } from "./helpers/withSetPropAction"
+import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree";
+import * as zod from 'zod';
+import { withSetPropAction } from "./helpers/withSetPropAction";
+
+export const vehicleSchema = zod.object({
+  plate: zod.string().min(6, "Plate must be at least 6 characters"),
+  brand: zod.string().min(2, "Brand must be at least 2 characters"),
+  model: zod.string().min(2, "Model must be at least 2 characters"),
+  year: zod.coerce.number().min(1900, "Year must be at least 1900"),
+  color: zod.string().min(2, "Color must be at least 2 characters"),
+  kilometers: zod.coerce.number().min(0, "Kilometers must be at least 0"),
+  engine: zod.string().min(2, "Engine must be at least 2 characters"),
+  transmission: zod.string().min(2, "Transmission must be at least 2 characters"),
+  photos: zod.array(zod.string()).min(1, "At least one photo is required").optional(),
+});
 
 export const VehicleModel = types
   .model("Vehicle")
@@ -21,7 +34,7 @@ export const VehicleModel = types
       return `${vehicle.brand} ${vehicle.model} ${vehicle.year}`
     },
     get thumbnail() {
-      return vehicle.photos[0]
+      return vehicle.photos && vehicle.photos[0]
     },
     get plateAccesibility() {
       return {
@@ -46,3 +59,5 @@ export const createVehicleDefaultModel = () => types.optional(VehicleModel, {
   transmission: undefined,
   photos: []
 })
+
+export const createVehicleModel = (data: VehicleSnapshotIn) => VehicleModel.create(data)

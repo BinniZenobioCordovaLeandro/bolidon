@@ -5,11 +5,8 @@ import { isRTL } from "../../i18n"
 import { useStores } from "../../models"
 import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
 import { colors, spacing } from "../../theme"
+import { $title } from "../styles"
 
-/**
- * @param {string} url - The URL to open in the browser.
- * @returns {void} - No return value.
- */
 function openLinkInBrowser(url: string) {
   Linking.canOpenURL(url).then((canOpen) => canOpen && Linking.openURL(url))
 }
@@ -41,10 +38,6 @@ const $container: ViewStyle = {
   paddingTop: spacing.lg + spacing.xl,
   paddingBottom: spacing.xxl,
   paddingHorizontal: spacing.lg,
-}
-
-const $title: TextStyle = {
-  marginBottom: spacing.xxl,
 }
 
 const $reportBugsLink: TextStyle = {

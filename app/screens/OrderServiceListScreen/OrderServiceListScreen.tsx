@@ -2,10 +2,12 @@ import { observer } from "mobx-react-lite"
 import React, { FC, useEffect } from "react"
 import {
   ActivityIndicator,
+  ImageStyle,
   View,
 } from "react-native"
 import {
   EmptyState,
+  Icon,
   ListView,
   Screen,
   Text,
@@ -17,9 +19,10 @@ import { OrderService } from "../../models/OrderService"
 import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
 import { delay } from "../../utils/delay"
 import { OrderServiceCard } from "../components/OrderServiceCard"
-import { $emptyState, $emptyStateImage, $heading, $labelStyle, $listContentContainer, $screenContentContainer, $toggle } from "../styles"
+import { VehicleCard } from "../components/VehicleCard"
+import { $emptyState, $emptyStateImage, $heading, $labelStyle, $listContentContainer, $row, $screenContentContainer, $toggle } from "../styles"
 
-export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServicetList">> = observer(
+export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServiceList">> = observer(
   function OrderServiceScreen(_props) {
     const { navigation } = _props
     const { orderServiceStore: {
@@ -32,6 +35,9 @@ export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServicetList">> = o
       hasFavorite,
       toggleFavorite,
       editOrderService,
+    }, vehicleStore: {
+      selectedVehicle,
+      dismissSelectedVehicle,
     } } = useStores()
 
     const [refreshing, setRefreshing] = React.useState(false)
@@ -41,15 +47,15 @@ export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServicetList">> = o
     useEffect(() => {
       ; (async function load() {
         setIsLoading(true)
-        await fetchOrderServices()
+        await fetchOrderServices(selectedVehicle?.guid)
         setIsLoading(false)
       })()
-    }, [])
+    }, [selectedVehicle])
 
     // simulate a longer refresh, if the refresh is too fast for UX
     async function manualRefresh() {
       setRefreshing(true)
-      await Promise.all([fetchOrderServices(), delay(3750)])
+      await Promise.all([fetchOrderServices(selectedVehicle?.guid), delay(3750)])
       setRefreshing(false)
     }
 
@@ -92,7 +98,22 @@ export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServicetList">> = o
           }
           ListHeaderComponent={
             <View style={$heading}>
-              <Text preset="heading" tx="demoPodcastListScreen.title" />
+              <View>
+                <Icon icon="x" style={$iconCloseVehicle} onPress={dismissSelectedVehicle} />
+                <VehicleCard
+                  vehicle={selectedVehicle}
+                  isFavorite
+                  onPressFavorite={() => { }}
+                  onPressItem={() => { }}
+                />
+              </View>
+              <View style={$row}>
+                <Text preset="heading" tx="demoPodcastListScreen.title" />
+                <Icon
+                  icon="addCircleOutline"
+                  onPress={manualRefresh}
+                />
+              </View>
               {(favoritesOnly || orderServicesForList.length > 0) && (
                 <View style={$toggle}>
                   <Toggle
@@ -126,3 +147,10 @@ export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServicetList">> = o
     )
   },
 )
+
+const $iconCloseVehicle: ImageStyle = {
+  position: "absolute",
+  top: 0,
+  right: 0,
+  padding: 10,
+}

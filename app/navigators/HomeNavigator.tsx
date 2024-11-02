@@ -6,14 +6,14 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Icon } from "../components"
 import { translate } from "../i18n"
 import { ComponentsScreen, HomeScreen, ProfileScreen } from "../screens"
-import { OrderServiceScreen } from "../screens/OrderServiceScreen/OrderServiceScreen"
+import { OrderServiceScreen } from "../screens/OrderServiceListScreen/OrderServiceListScreen"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 
 export type HomeTabParamList = {
   Home: undefined
   Components: { queryIndex?: string; itemIndex?: string }
-  OrderServicetList: undefined
+  OrderServiceList: undefined
   Profile: undefined
 }
 
@@ -62,7 +62,7 @@ export function HomeNavigator() {
       />
 
       <Tab.Screen
-        name="OrderServicetList"
+        name="OrderServiceList"
         component={OrderServiceScreen}
         options={{
           tabBarAccessibilityLabel: translate("demoNavigator.podcastListTab"),

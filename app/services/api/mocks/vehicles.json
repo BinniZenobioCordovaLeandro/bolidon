@@ -28,5 +28,125 @@
             "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
             "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
         ]
+    },
+    {
+        "guid": "3",
+        "plate": "GHI-789",
+        "brand": "Ford",
+        "model": "Mustang",
+        "year": 2015,
+        "color": "Blue",
+        "kilometers": 45000,
+        "engine": "5.0L V8",
+        "transmission": "Automatic",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
+    },
+    {
+        "guid": "4",
+        "plate": "JKL-012",
+        "brand": "Toyota",
+        "model": "Corolla",
+        "year": 2018,
+        "color": "White",
+        "kilometers": 30000,
+        "engine": "1.8L I4",
+        "transmission": "CVT",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
+    },
+    {
+        "guid": "5",
+        "plate": "MNO-345",
+        "brand": "Honda",
+        "model": "Civic",
+        "year": 2020,
+        "color": "Gray",
+        "kilometers": 15000,
+        "engine": "2.0L I4",
+        "transmission": "Manual",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
+    },
+    {
+        "guid": "6",
+        "plate": "PQR-678",
+        "brand": "BMW",
+        "model": "3 Series",
+        "year": 2017,
+        "color": "Black",
+        "kilometers": 40000,
+        "engine": "3.0L I6",
+        "transmission": "Automatic",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
+    },
+    {
+        "guid": "7",
+        "plate": "STU-901",
+        "brand": "Audi",
+        "model": "A4",
+        "year": 2016,
+        "color": "Silver",
+        "kilometers": 35000,
+        "engine": "2.0L I4",
+        "transmission": "Automatic",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
+    },
+    {
+        "guid": "8",
+        "plate": "VWX-234",
+        "brand": "Mercedes-Benz",
+        "model": "C-Class",
+        "year": 2019,
+        "color": "White",
+        "kilometers": 20000,
+        "engine": "2.0L I4",
+        "transmission": "Automatic",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
+    },
+    {
+        "guid": "9",
+        "plate": "YZA-567",
+        "brand": "Tesla",
+        "model": "Model 3",
+        "year": 2021,
+        "color": "Red",
+        "kilometers": 10000,
+        "engine": "Electric",
+        "transmission": "Automatic",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
+    },
+    {
+        "guid": "10",
+        "plate": "BCD-890",
+        "brand": "Nissan",
+        "model": "Altima",
+        "year": 2014,
+        "color": "Blue",
+        "kilometers": 60000,
+        "engine": "2.5L I4",
+        "transmission": "CVT",
+        "photos": [
+            "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
+            "https://mintt.com/media/iopt/magefan_blog/2003-Ford-Explorer-Problems.webp"
+        ]
     }
 ]

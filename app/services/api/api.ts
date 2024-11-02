@@ -6,7 +6,7 @@
  * documentation for more details.
  */
 import { ApiResponse, ApisauceInstance, create } from "apisauce"
-import { VehicleSnapshotIn } from "app/models"
+import { VehicleSnapshotIn, VehicleSnapshotOut } from "app/models"
 import { ComponentSnapshotIn } from "app/models/Component"
 import Config from "../../config"
 import type { OrderServiceSnapshotIn } from "../../models/OrderService"
@@ -59,10 +59,22 @@ export class Api {
     }
   }
 
+  async registerVehicle(_vehicle: VehicleSnapshotOut): Promise<{ kind: "ok"; vehicle: VehicleSnapshotIn } | GeneralApiProblem> {
+    try {
+      const vehicle: VehicleSnapshotIn = _vehicle as VehicleSnapshotIn;
+
+      console.log("🚗 vehicle", vehicle);
+
+      return { kind: "ok", vehicle }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+
   /**
    * Gets a list of recent React Native Radio episodes.
    */
-  async getOrderServices(): Promise<{ kind: "ok"; orderServices: OrderServiceSnapshotIn[] } | GeneralApiProblem> {
+  async getOrderServices(vehicleGuid?: string): Promise<{ kind: "ok"; orderServices: OrderServiceSnapshotIn[] } | GeneralApiProblem> {
     // make the api call
     const response: ApiResponse<ApiFeedResponse> = {
       ok: true,
@@ -80,7 +92,7 @@ export class Api {
 
     // transform the data into the format we are expecting
     try {
-      const rawData = orderServicesMock;
+      const rawData = vehicleGuid ? orderServicesMock.filter((orderService) => orderService.vehicleGuid === vehicleGuid) : orderServicesMock
 
       // This is where we transform the data into the shape we expect for our MST model.
       const orderServices: OrderServiceSnapshotIn[] =

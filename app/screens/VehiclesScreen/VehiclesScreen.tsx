@@ -6,6 +6,7 @@ import React, { FC, useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
 import {
   EmptyState,
+  Icon,
   ListView,
   Screen,
   Text,
@@ -13,7 +14,7 @@ import {
 } from "../../components";
 import { translate } from "../../i18n";
 import { VehicleCard } from "../components/VehicleCard";
-import { $emptyState, $emptyStateImage, $heading, $labelStyle, $listContentContainer, $screenContentContainer, $toggle } from "../styles";
+import { $emptyState, $emptyStateImage, $heading, $labelStyle, $listContentContainer, $row, $screenContentContainer, $toggle } from "../styles";
 
 export const VehiclesScreen: FC<CollaboratorTabScreenProps<"Vehicles">> = observer(function VehiclesScreen(_props) {
   const { navigation } = _props
@@ -85,7 +86,15 @@ export const VehiclesScreen: FC<CollaboratorTabScreenProps<"Vehicles">> = observ
         }
         ListHeaderComponent={
           <View style={$heading}>
-            <Text preset="heading" tx="VehiclesScreen.title" />
+            <View style={$row} >
+              <Text preset="heading" tx="VehiclesScreen.title" />
+              <Icon
+                icon="addCircleOutline"
+                onPress={
+                  () => navigation.navigate("NewVehicle")
+                }
+              />
+            </View>
             {(favoritesOnly || vehiclesForList.length > 0) && (
               <View style={$toggle}>
                 <Toggle
@@ -110,7 +119,7 @@ export const VehiclesScreen: FC<CollaboratorTabScreenProps<"Vehicles">> = observ
             onPressFavorite={() => toggleFavorite(item)}
             onPressItem={() => {
               selectVehicle(item);
-              navigation.navigate("OrderServiceDetail");
+              navigation.navigate("OrderServiceList");
             }}
           />
         )}

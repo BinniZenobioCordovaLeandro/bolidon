@@ -21,11 +21,14 @@ export const VehicleStoreModel = types
                 console.error(`Error fetching vehicles: ${JSON.stringify(response)}`)
             }
         },
-        addVehicle(vehicle: Vehicle) {
-            store.vehicles.push(vehicle)
-        },
-        removeVehicle(vehicle: Vehicle) {
-            store.vehicles.remove(vehicle)
+        async registerVehicle(vehicle: Vehicle) {
+            const response = await api.registerVehicle(vehicle)
+            if (response.kind === "ok") {
+                store.setProp("vehicles", store.vehicles.concat(response.vehicle))
+                this.selectVehicle(store.vehicles[store.vehicles.length - 1])
+            } else {
+                console.error(`Error registering vehicle: ${JSON.stringify(response)}`)
+            }
         },
         addFavorite(vehicle: Vehicle) {
             store.favorites.push(vehicle)
@@ -36,6 +39,9 @@ export const VehicleStoreModel = types
         selectVehicle(vehicle: Vehicle) {
             store.selectedVehicle = vehicle
         },
+        dismissSelectedVehicle() {
+            store.selectedVehicle = null
+        }
     }))
     .views((store) => ({
         get vehiclesForList() {
@@ -52,9 +58,6 @@ export const VehicleStoreModel = types
             } else {
                 store.addFavorite(vehicle)
             }
-        },
-        selectVehicle(vehicle: Vehicle) {
-            store.selectVehicle(vehicle)
         },
     }))
 

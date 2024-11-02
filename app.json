@@ -86,6 +86,12 @@
         {
           "sounds": []
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "La aplicación necesita permiso para acceder a tus fotos"
+        }
       ]
     ],
     "experiments": {

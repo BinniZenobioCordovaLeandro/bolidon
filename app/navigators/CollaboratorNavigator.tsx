@@ -2,7 +2,7 @@ import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigatio
 import { CompositeScreenProps } from "@react-navigation/native"
 import { Icon } from "app/components"
 import { ProfileScreen, VehiclesScreen } from "app/screens"
-import { OrderServiceScreen } from "app/screens/OrderServiceScreen/OrderServiceScreen"
+import { OrderServiceScreen } from "app/screens/OrderServiceListScreen/OrderServiceListScreen"
 import { colors, spacing, typography } from "app/theme"
 import React from "react"
 import { TextStyle, ViewStyle } from "react-native"
@@ -11,8 +11,8 @@ import { translate } from "../i18n"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 
 export type CollaboratorTabParamList = {
-  OrderServicetList: undefined
   Vehicles: undefined
+  OrderServiceList: undefined
   Profile: undefined
 }
 
@@ -37,6 +37,7 @@ export const CollaboratorNavigator = () => {
         tabBarLabelStyle: $tabBarLabel,
         tabBarItemStyle: $tabBarItem,
       }}
+      initialRouteName="OrderServiceList"
     >
       <Tab.Screen
         name="Vehicles"
@@ -50,7 +51,7 @@ export const CollaboratorNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="OrderServicetList"
+        name="OrderServiceList"
         component={OrderServiceScreen}
         options={{
           tabBarAccessibilityLabel: translate("collaboratorNavigator.podcastListTab"),

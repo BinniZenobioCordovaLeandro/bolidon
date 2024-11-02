@@ -84,6 +84,28 @@ const en = {
   ComponentsScreen: {
     jumpStart: "Tus componentes",
   },
+  NewVehicleScreen: {
+    title: "Registra tu vehiculo",
+    plateFieldLabel: "Placa",
+    plateFieldPlaceholder: "Ingresa la placa de tu vehiculo",
+    modelFieldLabel: "Modelo",
+    modelFieldPlaceholder: "Ingresa el modelo de tu vehiculo",
+    brandFieldLabel: "Marca",
+    brandFieldPlaceholder: "Ingresa la marca de tu vehiculo",
+    yearFieldLabel: "Año",
+    yearFieldPlaceholder: "Ingresa el año de tu vehiculo",
+    colorFieldLabel: "Color",
+    colorFieldPlaceholder: "Ingresa el color de tu vehiculo",
+    kilometersFieldLabel: "Kilometraje",
+    kilometersFieldPlaceholder: "Ingresa el kilometraje de tu vehiculo",
+    engineFieldLabel: "Motor",
+    engineFieldPlaceholder: "Ingresa el motor de tu vehiculo",
+    transmissionFieldLabel: "Transmision",
+    transmissionFieldPlaceholder: "Ingresa la transmision de tu vehiculo",
+    photosTitle: "Fotos de tu vehiculo",
+    photosAdd: "Agregar fotos",
+    submitButton: "Registrar vehiculo",
+  },
   VehiclesScreen: {
     title: "Vehiculos",
     selectVehicle: "Selecciona tu vehiculo",
@@ -91,6 +113,7 @@ const en = {
     addVehicle: "Agregar vehiculo",
     addVehicleHint: "Agrega un vehiculo para comenzar a disfrutar de los servicios de Bolidon.",
     onlyFavorites: "Mostrar solo favoritos",
+    filterVehicle: "Filtrar vehiculo",
     accessibility: {
       cardHint:
         "Double tap to listen to the episode. Double tap and hold to {{action}} this episode.",

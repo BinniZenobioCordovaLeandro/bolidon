@@ -13,8 +13,8 @@ export const OrderServiceStoreModel = types
   })
   .actions(withSetPropAction)
   .actions((store) => ({
-    async fetchOrderServices() {
-      const response = await api.getOrderServices()
+    async fetchOrderServices(vehicleGuid?: string) {
+      const response = await api.getOrderServices(vehicleGuid)
       if (response.kind === "ok") {
         store.setProp("orderServices", response.orderServices)
       } else {
@@ -53,5 +53,5 @@ export const OrderServiceStoreModel = types
     }
   }))
 
-export interface OrderServiceStore extends Instance<typeof OrderServiceStoreModel> {}
-export interface OrderServiceSnapshot extends SnapshotOut<typeof OrderServiceStoreModel> {}
+export interface OrderServiceStore extends Instance<typeof OrderServiceStoreModel> { }
+export interface OrderServiceSnapshot extends SnapshotOut<typeof OrderServiceStoreModel> { }

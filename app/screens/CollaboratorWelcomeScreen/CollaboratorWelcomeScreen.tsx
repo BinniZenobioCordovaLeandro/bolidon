@@ -1,10 +1,12 @@
-import React, { FC } from "react"
-import { observer } from "mobx-react-lite"
-import { TextStyle, View, ViewStyle } from "react-native"
-import { AppStackScreenProps } from "app/navigators"
 import { Button, Text } from "app/components"
+import { AppStackScreenProps } from "app/navigators"
 import { colors, spacing } from "app/theme"
 import { useSafeAreaInsetsStyle } from "app/utils/useSafeAreaInsetsStyle"
+import { observer } from "mobx-react-lite"
+import React, { FC } from "react"
+import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+
+const welcomeLogo = require("../../../assets/images/logo.png")
 
 interface CollaboratorWelcomeScreenProps extends AppStackScreenProps<"CollaboratorWelcome"> { }
 
@@ -20,6 +22,7 @@ export const CollaboratorWelcomeScreen: FC<CollaboratorWelcomeScreenProps> = obs
   return (
     <View style={$container}>
       <View style={$topContainer}>
+        <Image style={$welcomeLogo} source={welcomeLogo} resizeMode="contain" />
         <Text
           testID="welcome-heading"
           style={$welcomeHeading}
@@ -71,4 +74,10 @@ const $bottomContainer: ViewStyle = {
 
 const $welcomeHeading: TextStyle = {
   marginBottom: spacing.md,
+}
+
+const $welcomeLogo: ImageStyle = {
+  height: 88,
+  width: "100%",
+  marginBottom: spacing.xxl,
 }

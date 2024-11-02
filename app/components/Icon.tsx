@@ -86,6 +86,7 @@ export function Icon(props: IconProps) {
 }
 
 export const iconRegistry = {
+  addCircleOutline: require("../../assets/icons/addCircleOutline.png"),
   back: require("../../assets/icons/back.png"),
   bell: require("../../assets/icons/bell.png"),
   caretLeft: require("../../assets/icons/caretLeft.png"),
