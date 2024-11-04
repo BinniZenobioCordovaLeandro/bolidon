@@ -7,7 +7,7 @@ export const $root: ViewStyle = {
   flex: 1,
 }
 
-export const $container: ViewStyle = {
+export const $screenContainer: ViewStyle = {
   paddingHorizontal: spacing.lg,
 }
 

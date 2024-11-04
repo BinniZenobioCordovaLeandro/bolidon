@@ -1,12 +1,10 @@
-import { Dimensions, ImageStyle, TextStyle, ViewStyle } from "react-native"
-import { spacing } from "../../../theme"
-
-const { width } = Dimensions.get('window');
+import { ImageStyle, TextStyle, ViewStyle } from "react-native";
+import { spacing } from "../../../theme";
 
 export const $carImage: ImageStyle = {
   alignSelf: "auto",
-  width: width - spacing.lg,
-  minHeight: width - spacing.lg / 2,
+  width: "100%",
+  height: 200,
 }
 
 export const $container: ViewStyle = {

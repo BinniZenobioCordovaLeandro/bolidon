@@ -4,7 +4,7 @@ import { AppStackScreenProps } from "app/navigators"
 import { observer } from "mobx-react-lite"
 import React, { FC } from "react"
 import { Image, View } from "react-native"
-import { $container, $image, $imageContainer, $root, $row, $section } from "../styles"
+import { $image, $imageContainer, $root, $row, $screenContainer, $section } from "../styles"
 
 interface OrderServiceDetailScreenProps extends AppStackScreenProps<"OrderServiceDetail"> { }
 
@@ -15,7 +15,7 @@ export const OrderServiceDetailScreen: FC<OrderServiceDetailScreenProps> = obser
 
   return (
     <Screen style={$root} preset="scroll">
-      <View style={$container}>
+      <View style={$screenContainer}>
         <Text>Realizar a: {orderService?.kilometers} Kilometros</Text>
         <Text>Fecha de orden: {orderService?.pubDate}</Text>
         <View style={$section}>

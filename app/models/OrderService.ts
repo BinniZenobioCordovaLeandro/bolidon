@@ -5,7 +5,6 @@ import { formatDate } from "../utils/formatDate"
 import { ComponentModel, componentSchema } from "./Component"
 import { withSetPropAction } from "./helpers/withSetPropAction"
 
-
 export const orderServiceSchema = zod.object({
   title: zod.string().min(6, "Title must be at least 6 characters"),
   subtitle: zod.string().min(6, "Subtitle must be at least 6 characters"),

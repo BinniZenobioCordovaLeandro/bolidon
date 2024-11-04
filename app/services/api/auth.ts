@@ -10,7 +10,7 @@ export const Auth = {
             console.error(error);
         }
     },
-    signInWithCredential: async (email: string, password: string) => {
+    signInWithCredential: async (email: string, password: string): Promise<{ token: string; user: { email: string; isCollaborator: boolean; }; }> => {
         try {
             // const credential = auth.signInWithEmailAndPassword(email, password);
             if (email === "" || password === "") return;

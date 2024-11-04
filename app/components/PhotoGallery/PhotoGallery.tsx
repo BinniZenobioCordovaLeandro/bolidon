@@ -45,7 +45,7 @@ export const PhotoGallery = observer(function PhotoGallery(props: PhotoGalleryPr
         {
           error && <Text>{error}</Text>
         }
-        <Button tx="NewVehicleScreen.photosAdd" style={$photoItem} onPress={onAddPhoto} />
+        <Button tx="PhotoGalleryComponent.addPhoto" style={$photoItem} onPress={onAddPhoto} />
       </View>
     </View>
   )

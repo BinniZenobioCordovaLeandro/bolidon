@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite";
 import * as React from "react";
 import { FC } from "react";
 import { ImageStyle, View, ViewStyle } from "react-native";
-import { $container, $textField, $title } from "../styles";
+import { $screenContainer, $textField, $title } from "../styles";
 
 interface NewOrderServiceScreenProps extends AppStackScreenProps<"NewOrderService"> { }
 
@@ -27,7 +27,7 @@ export const NewOrderServiceScreen: FC<NewOrderServiceScreenProps> = observer(fu
   }
 
   return (
-    <Screen preset="scroll" safeAreaEdges={["top", "bottom"]} contentContainerStyle={$container}>
+    <Screen preset="scroll" safeAreaEdges={["top", "bottom"]} contentContainerStyle={$screenContainer}>
       <Text style={$title} preset="heading" tx="NewOrderServiceScreen.title" />
       <TextFieldControlled
         name="kilometers"

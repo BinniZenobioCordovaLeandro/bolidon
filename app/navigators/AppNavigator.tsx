@@ -47,6 +47,8 @@ export type AppStackParamList = {
   Vehicles: undefined
   NewVehicle: undefined
   NewOrderService: undefined
+  RepairRequest: undefined
+  AssistedDiagnosis: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -113,6 +115,8 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="Vehicles" component={Screens.VehiclesScreen} />
       <Stack.Screen name="NewVehicle" component={Screens.NewVehicleScreen} options={generateOptions} />
       <Stack.Screen name="NewOrderService" component={Screens.NewOrderServiceScreen} options={generateOptions} />
+      <Stack.Screen name="RepairRequest" component={Screens.RepairRequestScreen} options={generateOptions} />
+      <Stack.Screen name="AssistedDiagnosis" component={Screens.AssistedDiagnosisScreen} options={generateOptions} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

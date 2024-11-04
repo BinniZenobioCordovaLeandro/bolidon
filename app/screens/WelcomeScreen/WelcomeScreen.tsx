@@ -43,7 +43,16 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
           preset="heading"
         />
         <Text tx="welcomeScreen.exciting" preset="subheading" />
+
+        <View style={$middleContainer}>
+          <Text style={$item} tx="welcomeScreen.feat1Title" preset="bold" />
+          <Text style={$item} tx="welcomeScreen.feat2Title" preset="bold" />
+          <Text style={$item} tx="welcomeScreen.feat3Title" preset="bold" />
+        </View>
+
+
       </View>
+
 
       <View style={[$bottomContainer, $bottomContainerInsets]}>
         <Text tx="welcomeScreen.postscript" />
@@ -70,6 +79,17 @@ const $topContainer: ViewStyle = {
   flexBasis: "57%",
   justifyContent: "center",
   paddingHorizontal: spacing.lg,
+}
+
+const $middleContainer: ViewStyle = {
+  flexShrink: 1,
+  backgroundColor: colors.palette.neutral100,
+  padding: spacing.lg,
+  marginVertical: spacing.lg,
+}
+
+const $item: TextStyle = {
+  marginBottom: spacing.md,
 }
 
 const $bottomContainer: ViewStyle = {

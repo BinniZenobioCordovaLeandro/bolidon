@@ -1,4 +1,4 @@
-import { Button, Screen, Text } from "@/components";
+import { Button, PhotoGallery, Screen, Text } from "@/components";
 import { TextFieldControlled } from "@/components/TextField/TextFieldControlled";
 import { useReactForm } from "@/hooks/useForm";
 import { useStores, vehicleSchema } from "@/models";
@@ -6,8 +6,7 @@ import { AppStackScreenProps } from "@/navigators";
 import { observer } from "mobx-react-lite";
 import * as React from "react";
 import { FC } from "react";
-import { PhotoGallery } from "./components";
-import { $container, $tapButton, $textField, $title } from "./styles";
+import { $screenContainer, $tapButton, $textField, $title } from "../styles";
 
 interface NewVehicleScreenProps extends AppStackScreenProps<"NewVehicle"> { }
 
@@ -31,7 +30,7 @@ export const NewVehicleScreen: FC<NewVehicleScreenProps> = observer(function New
   }
 
   return (
-    <Screen preset="scroll" safeAreaEdges={["top"]} contentContainerStyle={$container}>
+    <Screen preset="scroll" safeAreaEdges={["top"]} contentContainerStyle={$screenContainer}>
       <Text style={$title} preset="heading" tx="NewVehicleScreen.title" />
       <TextFieldControlled
         name="plate"

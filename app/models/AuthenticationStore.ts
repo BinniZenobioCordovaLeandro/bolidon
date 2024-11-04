@@ -27,9 +27,7 @@ export const AuthenticationStoreModel = types
     async authenticate(password: string) {
       const { token, user } = await Auth.signInWithCredential(store.authEmail, password)
       console.log("authenticate", token);
-      // We'll mock this with a fake token.
-      this.setAuthToken(String(Date.now()), true)
-      store.setProp("isCollaborator", user.isAdmin)
+      this.setAuthToken(String(Date.now()), user.isCollaborator)
       return true;
     },
     async authenticateWithGoogle(token: string) {

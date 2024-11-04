@@ -30,6 +30,23 @@ export const useImagePicker = () => {
     return null;
   };
 
+  const pickVideo = async (): Promise<string[] | null> => {
+    const isAllowed = await requestPermission();
+    if (!isAllowed) return null;
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      return result.assets.map((asset) => asset.uri);
+    }
+    return null;
+  }
+
   const pickCamera = async (): Promise<string[] | null> => {
     const isAllowed = await requestPermission();
     if (!isAllowed) return null;
@@ -49,6 +66,7 @@ export const useImagePicker = () => {
 
   return {
     pickImage,
+    pickVideo,
     pickCamera,
     error,
   };

@@ -10,6 +10,12 @@ const en = {
   welcomeScreen: {
     postscript: "Pisa a fondo y disfruta del viaje.",
     readyForLaunch: "¡Listo para convertir tu vehiculo en un BOLIDON!",
+    feat1Title: "Diagnóstico Inteligente con IA",
+    feat1Desc: "Identifica problemas en tu coche con ayuda de inteligencia artificial para un diagnóstico más rápido y preciso.",
+    feat2Title: "Recordatorios y Citas de Reparación",
+    feat2Desc: "No pierdas de vista los servicios importantes y solicita citas de reparación en tu taller de confianza directamente desde la app.",
+    feat3Title: "Historial Completo de Servicios",
+    feat3Desc: "Lleva un registro organizado de todos los mantenimientos para mantener tu coche siempre en óptimas condiciones y facilitar futuras reparaciones.",
     exciting: "¡Esto va a ser emocionante!",
     letsGo: "¡Vamos causa!",
   },
@@ -32,6 +38,12 @@ const en = {
       content: "No data found yet. Try clicking the button to refresh or reload the app.",
       button: "Let's try this again",
     },
+  },
+  PhotoGalleryComponent: {
+    addPhoto: "Add photo",
+  },
+  VideoGalleryComponent: {
+    addVideo: "Add video",
   },
   errors: {
     invalidEmail: "Invalid email address.",
@@ -80,6 +92,8 @@ const en = {
       "Manten tu vehiculo en optimas condiciones, con los mejores productos y servicios del mercado.",
     offers: "Tienes ofertas",
     serviceOrder: "Tienes orden de servicio",
+    diagnosticAI: "Iniciar diagnostico con IA",
+    repair: "Reparar vehiculo",
   },
   ComponentsScreen: {
     jumpStart: "Tus componentes",
@@ -151,6 +165,27 @@ const en = {
     photosFieldLabel: "Fotos",
     photosFieldPlaceholder: "Agrega fotos del problema",
     submitButton: "Registrar orden de servicio",
+  },
+  AssistedDiagnosisScreen: {
+    title: "Diagnostica con Inteligencia Artificial",
+    kilometersFieldLabel: "Kilometros actuales",
+    kilometersFieldPlaceholder: "Ingresa los kilometros actuales",
+    descriptionFieldLabel: "Describe el problema",
+    descriptionFieldPlaceholder: "Ingresa una descripcion detallada del problema",
+    photosTitle: "Fotos del problema",
+    photosAdd: "Agregar fotos",
+    videoTitle: "Video del problema",
+    videoAdd: "Agregar video",
+    submitButton: "Inteligencia artificial, ayudame!",
+  },
+  RepairRequestScreen: {
+    title: "Quiero una cita para reparar mi vehiculo",
+    kilometersFieldLabel: "Kilometros actuales",
+    kilometersFieldPlaceholder: "Ingresa los kilometros actuales",
+    descriptionFieldLabel: "Describe el problema",
+    descriptionFieldPlaceholder: "Ingresa una descripcion detallada del problema",
+    termsAndConditions: "Acepto los terminos y condiciones",
+    submitButton: "Enviame una cita",
   },
   ProfileScreen: {
     title: "Perfil",
