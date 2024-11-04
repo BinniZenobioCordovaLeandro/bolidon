@@ -13,4 +13,6 @@ export * from "./CollaboratorWelcomeScreen/CollaboratorWelcomeScreen"
 export * from "./OrderServiceDetailScreen/OrderServiceDetailScreen"
 export * from "./VehiclesScreen/VehiclesScreen"
 
+export * from "./NewOrderServiceScreen/NewOrderServiceScreen"
 export * from "./NewVehicleScreen"
+

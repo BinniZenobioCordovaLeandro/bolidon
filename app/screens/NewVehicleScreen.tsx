@@ -1,14 +1,13 @@
-import { Button, Icon, Screen, Text } from "@/components";
-import { TextFieldControlled } from "@/components/TextFieldControlled";
+import { Button, Screen, Text } from "@/components";
+import { TextFieldControlled } from "@/components/TextField/TextFieldControlled";
 import { useReactForm } from "@/hooks/useForm";
-import { useImagePicker } from "@/hooks/useImagePicker";
 import { useStores, vehicleSchema } from "@/models";
 import { AppStackScreenProps } from "@/navigators";
 import { observer } from "mobx-react-lite";
 import * as React from "react";
 import { FC } from "react";
-import { Image, ImageStyle, View } from "react-native";
-import { $container, $tapButton, $textField, $title, $wrap } from "./styles";
+import { PhotoGallery } from "./components";
+import { $container, $tapButton, $textField, $title } from "./styles";
 
 interface NewVehicleScreenProps extends AppStackScreenProps<"NewVehicle"> { }
 
@@ -16,28 +15,19 @@ export const NewVehicleScreen: FC<NewVehicleScreenProps> = observer(function New
   const { navigation } = _props
 
   const { handleSubmit, control } = useReactForm(vehicleSchema);
-  const { pickImage, error } = useImagePicker();
 
   const {
-    vehicleStore: { registerVehicle }
+    vehicleStore: { createVehicle: registerVehicle }
   } = useStores();
 
   const [photos, setPhotos] = React.useState<string[]>([]);
 
   const onSubmitHandler = async (data: any) => {
-    console.log("🎁 new vehicle data", data);
     await registerVehicle({
       ...data,
       photos,
     });
     navigation.navigate("OrderServiceList");
-  }
-
-  const onAddPhoto = async () => {
-    const assets = await pickImage();
-    if (assets) {
-      setPhotos([...photos, ...assets]);
-    }
   }
 
   return (
@@ -102,25 +92,10 @@ export const NewVehicleScreen: FC<NewVehicleScreenProps> = observer(function New
         placeholderTx="NewVehicleScreen.transmissionFieldPlaceholder"
       />
       <Text preset="subheading" tx="NewVehicleScreen.photosTitle" />
-      {
-        error && <Text>{error}</Text>
-      }
-      <View style={$wrap}>
-        {
-          photos.map((item) => (
-            <View key={item}>
-              <Icon icon="x" style={$photoItemDelete} onPress={() => setPhotos(photos.filter((photo) => photo !== item))} />
-              <Image
-                style={$photoItem}
-                source={{ uri: item }}
-              />
-            </View>
-          ))
-        }
-        <View>
-          <Button tx="NewVehicleScreen.photosAdd" style={$photoItem} onPress={onAddPhoto} />
-        </View>
-      </View>
+      <PhotoGallery
+        value={photos}
+        onChangeText={setPhotos}
+      />
       <Button
         tx="NewVehicleScreen.submitButton"
         style={$tapButton}
@@ -129,16 +104,3 @@ export const NewVehicleScreen: FC<NewVehicleScreenProps> = observer(function New
     </Screen>
   )
 })
-
-const $photoItem: ImageStyle = {
-  width: 120,
-  height: 120,
-  marginBottom: 16,
-  backgroundColor: "#f0f0f0",
-}
-
-const $photoItemDelete: ImageStyle = {
-  position: "absolute",
-  alignSelf: "center",
-  zIndex: 1,
-}

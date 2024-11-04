@@ -21,8 +21,8 @@ export const VehicleStoreModel = types
                 console.error(`Error fetching vehicles: ${JSON.stringify(response)}`)
             }
         },
-        async registerVehicle(vehicle: Vehicle) {
-            const response = await api.registerVehicle(vehicle)
+        async createVehicle(vehicle: Vehicle) {
+            const response = await api.createVehicle(vehicle)
             if (response.kind === "ok") {
                 store.setProp("vehicles", store.vehicles.concat(response.vehicle))
                 this.selectVehicle(store.vehicles[store.vehicles.length - 1])

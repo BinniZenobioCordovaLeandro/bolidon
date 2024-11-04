@@ -21,6 +21,14 @@ export const OrderServiceStoreModel = types
         console.error(`Error fetching orderServices: ${JSON.stringify(response)}`)
       }
     },
+    async createOrderService(orderService: OrderService) {
+      const response = await api.createOrderService(orderService)
+      if (response.kind === "ok") {
+        store.setProp("orderServices", store.orderServices.concat(response.orderService))
+      } else {
+        console.error(`Error creating orderService: ${JSON.stringify(response)}`)
+      }
+    },
     addFavorite(orderService: OrderService) {
       store.favorites.push(orderService)
     },

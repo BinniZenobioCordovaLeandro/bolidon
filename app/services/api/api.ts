@@ -59,7 +59,7 @@ export class Api {
     }
   }
 
-  async registerVehicle(_vehicle: VehicleSnapshotOut): Promise<{ kind: "ok"; vehicle: VehicleSnapshotIn } | GeneralApiProblem> {
+  async createVehicle(_vehicle: VehicleSnapshotOut): Promise<{ kind: "ok"; vehicle: VehicleSnapshotIn } | GeneralApiProblem> {
     try {
       const vehicle: VehicleSnapshotIn = _vehicle as VehicleSnapshotIn;
 
@@ -105,6 +105,18 @@ export class Api {
       if (__DEV__ && e instanceof Error) {
         console.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
       }
+      return { kind: "bad-data" }
+    }
+  }
+
+  async createOrderService(_orderService: OrderServiceSnapshotIn): Promise<{ kind: "ok"; orderService: OrderServiceSnapshotIn } | GeneralApiProblem> {
+    try {
+      const orderService: OrderServiceSnapshotIn = _orderService;
+
+      console.log("🎁 orderService", orderService);
+
+      return { kind: "ok", orderService }
+    } catch {
       return { kind: "bad-data" }
     }
   }

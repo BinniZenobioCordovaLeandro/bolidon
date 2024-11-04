@@ -18,7 +18,7 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import Config from "../config"
 import { useStores } from "../models"
-import { CollaboratorNavigator, CollaboratorNavigatorParamList } from "./CollaboratorNavigator"
+import { CollaboratorNavigator, CollaboratorTabParamList } from "./CollaboratorNavigator"
 import { HomeNavigator, HomeTabParamList } from "./HomeNavigator"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 
@@ -40,12 +40,13 @@ export type AppStackParamList = {
   Login: undefined
   Register: undefined
   Home: NavigatorScreenParams<HomeTabParamList>
-  Collaborator: NavigatorScreenParams<CollaboratorNavigatorParamList>
+  Collaborator: NavigatorScreenParams<CollaboratorTabParamList>
   // 🔥 Your screens go here
   CollaboratorWelcome: undefined
   OrderServiceDetail: undefined
   Vehicles: undefined
   NewVehicle: undefined
+  NewOrderService: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -111,6 +112,7 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="OrderServiceDetail" component={Screens.OrderServiceDetailScreen} options={generateOptions} />
       <Stack.Screen name="Vehicles" component={Screens.VehiclesScreen} />
       <Stack.Screen name="NewVehicle" component={Screens.NewVehicleScreen} options={generateOptions} />
+      <Stack.Screen name="NewOrderService" component={Screens.NewOrderServiceScreen} options={generateOptions} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

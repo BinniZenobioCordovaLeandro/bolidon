@@ -111,7 +111,7 @@ export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServiceList">> = ob
                 <Text preset="heading" tx="demoPodcastListScreen.title" />
                 <Icon
                   icon="addCircleOutline"
-                  onPress={manualRefresh}
+                  onPress={() => navigation.navigate("NewOrderService")}
                 />
               </View>
               {(favoritesOnly || orderServicesForList.length > 0) && (

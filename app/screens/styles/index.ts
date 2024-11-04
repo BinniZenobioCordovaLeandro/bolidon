@@ -70,7 +70,7 @@ export const $image: ImageStyle = {
 }
 
 export const $textField: ViewStyle = {
-  marginBottom: spacing.lg,
+  marginBottom: spacing.sm,
 }
 
 export const $tapButton: ViewStyle = {

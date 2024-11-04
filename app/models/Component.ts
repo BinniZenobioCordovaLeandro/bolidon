@@ -1,6 +1,26 @@
-import { formatDate } from "app/utils/formatDate"
-import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree"
-import { withSetPropAction } from "./helpers/withSetPropAction"
+import { formatDate } from "app/utils/formatDate";
+import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree";
+import * as zod from 'zod';
+import { withSetPropAction } from "./helpers/withSetPropAction";
+
+export const componentSchema = zod.object({
+  service: zod.string().optional(),
+  component: zod.string().min(6, "Component must be at least 6 characters"),
+  frequencyMiles: zod.number().optional(),
+  milesToService: zod.number().optional(),
+  lastServiceMiles: zod.number().optional(),
+  estimatedDueDate: zod.string().optional(),
+  urgencyLevel: zod.number().min(0).max(3),
+  priorityLevel: zod.string().optional(),
+  costEstimate: zod.number().optional(),
+  serviceLocation: zod.string().optional(),
+  userRating: zod.number().optional(),
+  warrantyCoverage: zod.boolean().optional(),
+  recommendedServiceProviders: zod.array(zod.string()).optional(),
+  nextNotification: zod.number().optional(),
+  diyGuideLink: zod.string().optional(),
+  notes: zod.string().optional(),
+});
 
 export const ComponentModel = types
   .model("Component")
@@ -11,7 +31,7 @@ export const ComponentModel = types
     milesToService: types.maybe(types.number),
     lastServiceMiles: types.maybe(types.number),
     estimatedDueDate: types.maybe(types.string),
-    urgencyLevel: types.maybe(types.string),
+    urgencyLevel: types.maybe(types.number),
     priorityLevel: types.maybe(types.string),
     costEstimate: types.maybe(types.number),
     serviceLocation: types.maybe(types.string),
