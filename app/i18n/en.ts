@@ -197,6 +197,8 @@ const en = {
     reportBugs: "Reportar errores",
     suggestFeature: "Enviar Sugerencias",
     profile: "Editar perfil",
+    publicOffer: "Crear oferta publica",
+    joinUs: "Tienes taller?, Brindas servicio a vehiculos?, Unete a nuestro equipo",
   },
   demoDebugScreen: {
     howTo: "HOW TO",

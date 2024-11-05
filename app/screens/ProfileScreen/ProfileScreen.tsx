@@ -16,7 +16,7 @@ export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function Profile
   _props,
 ) {
   const {
-    authenticationStore: { logout, authEmail },
+    authenticationStore: { logout, authEmail, isCollaborator },
   } = useStores()
 
   return (
@@ -24,7 +24,7 @@ export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function Profile
       <Text
         style={$reportBugsLink}
         tx="ProfileScreen.suggestFeature"
-        onPress={() => openLinkInBrowser("https://docs.google.com/forms/d/e/1FAIpQLSeVlMhXwz7OFjQRov5UAevUXCECQlX_XoJ8G-XKxq5STC_-9Q/viewform?usp=sf_link")}
+        onPress={() => openLinkInBrowser("https://forms.gle/LWTry1Dq1piQHYaG8")}
       />
       <Text style={$title} preset="heading" tx="ProfileScreen.title" />
       <Text text={authEmail} preset="subheading" />
@@ -39,9 +39,43 @@ export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function Profile
         }
         onPress={() => openLinkInBrowser("")}
       />
+      {
+        isCollaborator && (
+          <>
+            <ListItem
+              tx="ProfileScreen.publicOffer"
+              bottomSeparator
+              rightIcon={isRTL ? "caretLeft" : "caretRight"}
+              LeftComponent={
+                <View style={$logoContainer}>
+                  <Icon icon="offers" size={40} />
+                </View>
+              }
+              onPress={() => openLinkInBrowser("")}
+            />
+          </>
+        )
+      }
       <View style={$buttonContainer}>
         <Button style={$button} tx="common.logOut" onPress={logout} />
       </View>
+      {
+        !isCollaborator && (
+          <>
+            <ListItem
+              tx="ProfileScreen.joinUs"
+              bottomSeparator
+              rightIcon={isRTL ? "caretLeft" : "caretRight"}
+              LeftComponent={
+                <View style={$logoContainer}>
+                  <Icon icon="repair" size={40} />
+                </View>
+              }
+              onPress={() => openLinkInBrowser("https://forms.gle/nbq1UxMbqVSpABub8")}
+            />
+          </>
+        )
+      }
     </Screen>
   )
 }
