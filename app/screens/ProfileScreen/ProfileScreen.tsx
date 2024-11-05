@@ -34,7 +34,7 @@ export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function Profile
         rightIcon={isRTL ? "caretLeft" : "caretRight"}
         LeftComponent={
           <View style={$logoContainer}>
-            <Icon icon="offers" size={40} />
+            <Icon icon="person" size={40} />
           </View>
         }
         onPress={() => openLinkInBrowser("")}

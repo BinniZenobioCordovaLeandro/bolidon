@@ -3,7 +3,6 @@ import { View } from "react-native"
 import { AutoImage, Icon, ListItem, Screen, Text } from "../../components"
 import { isRTL } from "../../i18n"
 import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
-import { openLinkInBrowser } from "../../utils/openLinkInBrowser"
 import { $carImage, $container, $logoContainer, $tagline, $title } from "./styles"
 
 export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_props) {
@@ -26,7 +25,7 @@ export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_p
             <Icon icon="offers" size={40} />
           </View>
         }
-        onPress={() => openLinkInBrowser("")}
+        onPress={() => navigation.navigate("Offers")}
       />
       <ListItem
         tx="HomeScreen.serviceOrder"

@@ -164,7 +164,12 @@ const en = {
     photosAdd: "Agregar fotos",
     photosFieldLabel: "Fotos",
     photosFieldPlaceholder: "Agrega fotos del problema",
+    termsAndConditions: "Acepto los terminos y condiciones",
     submitButton: "Registrar orden de servicio",
+  },
+  OffersScreen: {
+    title: "Ofertas",
+    description: "Aprovecha las ofertas y promociones de nuestros talleres aliados.",
   },
   AssistedDiagnosisScreen: {
     title: "Diagnostica con Inteligencia Artificial",
@@ -191,7 +196,7 @@ const en = {
     title: "Perfil",
     reportBugs: "Reportar errores",
     suggestFeature: "Enviar Sugerencias",
-    profile: "Perfil",
+    profile: "Editar perfil",
   },
   demoDebugScreen: {
     howTo: "HOW TO",

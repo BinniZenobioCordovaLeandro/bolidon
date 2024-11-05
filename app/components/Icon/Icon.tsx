@@ -46,6 +46,7 @@ export const iconRegistry = {
   serviceOrder: (props: iconProps) => <Ionicons name="construct" {...props} />,
   diagnosticAI: (props: iconProps) => <Ionicons name="flask" {...props} />,
   repair: (props: iconProps) => <Ionicons name="construct" {...props} />,
+  person: (props: iconProps) => <Ionicons name="person" {...props} />,
 };
 
 

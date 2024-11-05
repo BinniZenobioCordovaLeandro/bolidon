@@ -1,6 +1,5 @@
 import { Button, PhotoGalleryControlled, Screen, Text } from "@/components";
 import { TextFieldControlled } from "@/components/TextField/TextFieldControlled";
-import { VideoGalleryControlled } from "@/components/VideoGallery/VideoGalleryControlled";
 import { useReactForm } from "@/hooks/useForm";
 import { AppStackScreenProps } from "@/navigators";
 import { observer } from "mobx-react-lite";
@@ -50,10 +49,10 @@ export const AssistedDiagnosisScreen: FC<AssistedDiagnosisScreenProps> = observe
         name="photos"
         control={control}
       />
-      <VideoGalleryControlled
+      {/* <VideoGalleryControlled
         name="videos"
         control={control}
-      />
+      /> */}
       <Button
         tx="AssistedDiagnosisScreen.submitButton"
         style={$tapButton}

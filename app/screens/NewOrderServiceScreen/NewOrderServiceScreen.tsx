@@ -1,4 +1,4 @@
-import { Button, PhotoGalleryControlled, Screen, Text } from "@/components";
+import { Button, PhotoGalleryControlled, Screen, Text, Toggle } from "@/components";
 import { SelectableControlled } from "@/components/Selectable/SelectableControlled";
 import { TextFieldControlled } from "@/components/TextField/TextFieldControlled";
 import { useReactForm } from "@/hooks/useForm";
@@ -17,6 +17,7 @@ interface NewOrderServiceScreenProps extends AppStackScreenProps<"NewOrderServic
 export const NewOrderServiceScreen: FC<NewOrderServiceScreenProps> = observer(function NewOrderServiceScreen(_props) {
   const { navigation } = _props
 
+  const [termsAndConditions, settermsAndConditions] = React.useState(false);
   const { handleSubmit, control } = useReactForm(orderServiceSchema);
   useStores()
 
@@ -88,7 +89,16 @@ export const NewOrderServiceScreen: FC<NewOrderServiceScreenProps> = observer(fu
         labelTx="NewOrderServiceScreen.priceFieldLabel"
         placeholderTx="NewOrderServiceScreen.priceFieldPlaceholder"
       />
+      <Toggle
+        value={termsAndConditions}
+        onValueChange={settermsAndConditions}
+        labelTx="NewOrderServiceScreen.termsAndConditions"
+        labelPosition="left"
+        variant="switch"
+      />
+      <View style={$headerSeparator} />
       <Button
+        disabled={!termsAndConditions}
         tx="NewOrderServiceScreen.submitButton"
         onPress={handleSubmit(onSubmitHandler)}
       />

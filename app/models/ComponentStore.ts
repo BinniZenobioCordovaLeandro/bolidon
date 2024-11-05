@@ -13,6 +13,7 @@ export const ComponentStoreModel = types
     async fetchComponents() {
       const response = await api.getComponents()
       if (response.kind === "ok") {
+        console.log(`Fetched components: ${response.components.length}`);
         store.setProp("components", response.components)
       } else {
         console.error(`Error fetching components: ${JSON.stringify(response)}`)

@@ -13,3 +13,4 @@ export * from "./VehiclesScreen/VehiclesScreen"
 export * from "./WelcomeScreen/WelcomeScreen"
 
 export * from "./AssistedDiagnosisScreen"
+export * from "./OffersScreen"

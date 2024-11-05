@@ -59,6 +59,12 @@ export const ComponentsScreen: FC<HomeTabScreenProps<"Components">> = function C
             subtitle: `Estamos a menos de 500 km para realizar estos ${componentStore.components.length} cambios`,
             data: [...componentStore.components],
           },
+          {
+            name: new Date("2022-12-31").toLocaleDateString(),
+            description: "Proximos cambios",
+            subtitle: `Estamos a menos de 2 semanas para realizar estos ${componentStore.components.length} cambios`,
+            data: [...componentStore.components],
+          }
         ]}
         renderItem={({ item }) => {
           return (
