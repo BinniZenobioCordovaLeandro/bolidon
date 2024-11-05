@@ -191,6 +191,7 @@ const en = {
     title: "Perfil",
     reportBugs: "Reportar errores",
     suggestFeature: "Enviar Sugerencias",
+    profile: "Perfil",
   },
   demoDebugScreen: {
     howTo: "HOW TO",

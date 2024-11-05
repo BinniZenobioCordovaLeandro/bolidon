@@ -38,7 +38,11 @@ export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServiceList">> = ob
     }, vehicleStore: {
       selectedVehicle,
       dismissSelectedVehicle,
-    } } = useStores()
+    },
+      authenticationStore: {
+        isCollaborator
+      }
+    } = useStores()
 
     const [refreshing, setRefreshing] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(false)
@@ -98,15 +102,19 @@ export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServiceList">> = ob
           }
           ListHeaderComponent={
             <View style={$heading}>
-              <View>
-                <Icon icon="x" style={$iconCloseVehicle} onPress={dismissSelectedVehicle} />
-                <VehicleCard
-                  vehicle={selectedVehicle}
-                  isFavorite
-                  onPressFavorite={() => { }}
-                  onPressItem={() => { }}
-                />
-              </View>
+              {
+                isCollaborator && (
+                  <View>
+                    <Icon icon="x" style={$iconCloseVehicle} onPress={dismissSelectedVehicle} />
+                    <VehicleCard
+                      vehicle={selectedVehicle}
+                      isFavorite
+                      onPressFavorite={() => { }}
+                      onPressItem={() => { }}
+                    />
+                  </View>
+                )
+              }
               <View style={$row}>
                 <Text preset="heading" tx="demoPodcastListScreen.title" />
                 <Icon

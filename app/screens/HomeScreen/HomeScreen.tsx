@@ -1,13 +1,10 @@
 import React, { FC } from "react"
-import { Image, View } from "react-native"
-import { AutoImage, ListItem, Screen, Text } from "../../components"
+import { View } from "react-native"
+import { AutoImage, Icon, ListItem, Screen, Text } from "../../components"
 import { isRTL } from "../../i18n"
 import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
 import { openLinkInBrowser } from "../../utils/openLinkInBrowser"
-import { $carImage, $container, $logo, $logoContainer, $tagline, $title } from "./styles"
-
-const reactNativeLiveLogo = require("../../../assets/images/demo/rnl-logo.png")
-const reactNativeNewsletterLogo = require("../../../assets/images/demo/rnn-logo.png")
+import { $carImage, $container, $logoContainer, $tagline, $title } from "./styles"
 
 export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_props) {
   const { navigation } = _props
@@ -26,7 +23,7 @@ export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_p
         rightIcon={isRTL ? "caretLeft" : "caretRight"}
         LeftComponent={
           <View style={$logoContainer}>
-            <Image source={reactNativeNewsletterLogo} style={$logo} />
+            <Icon icon="offers" size={40} />
           </View>
         }
         onPress={() => openLinkInBrowser("")}
@@ -37,10 +34,10 @@ export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_p
         rightIcon={isRTL ? "caretLeft" : "caretRight"}
         LeftComponent={
           <View style={$logoContainer}>
-            <Image source={reactNativeLiveLogo} style={$logo} />
+            <Icon icon="serviceOrder" size={40} />
           </View>
         }
-        onPress={() => navigation.navigate("OrderServicetList")}
+        onPress={() => navigation.navigate("OrderServiceList")}
       />
       <ListItem
         tx="HomeScreen.diagnosticAI"
@@ -48,7 +45,7 @@ export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_p
         rightIcon={isRTL ? "caretLeft" : "caretRight"}
         LeftComponent={
           <View style={$logoContainer}>
-            <Image source={reactNativeLiveLogo} style={$logo} />
+            <Icon icon="diagnosticAI" size={40} />
           </View>
         }
         onPress={() => navigation.navigate("AssistedDiagnosis")}
@@ -59,7 +56,7 @@ export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_p
         rightIcon={isRTL ? "caretLeft" : "caretRight"}
         LeftComponent={
           <View style={$logoContainer}>
-            <Image source={reactNativeLiveLogo} style={$logo} />
+            <Icon icon="repair" size={40} />
           </View>
         }
         onPress={() => navigation.navigate("RepairRequest")}

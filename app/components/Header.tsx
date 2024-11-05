@@ -10,7 +10,7 @@ import {
 import { isRTL, translate } from "../i18n"
 import { colors, spacing } from "../theme"
 import { ExtendedEdge, useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
-import { Icon, IconTypes } from "./Icon"
+import { Icon, IconTypes } from "./Icon/Icon"
 import { Text, TextProps } from "./Text"
 
 export interface HeaderProps {

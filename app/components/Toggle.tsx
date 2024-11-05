@@ -1,7 +1,8 @@
+import { Icon, IconTypes } from "@/components/Icon/Icon"
+import { isRTL } from "app/i18n"
 import React, { ComponentType, FC, useMemo } from "react"
 import {
   GestureResponderEvent,
-  Image,
   ImageStyle,
   Platform,
   StyleProp,
@@ -21,9 +22,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated"
 import { colors, spacing } from "../theme"
-import { iconRegistry, IconTypes } from "./Icon"
 import { Text, TextProps } from "./Text"
-import { isRTL } from "app/i18n"
 
 type Variants = "checkbox" | "switch" | "radio"
 
@@ -314,8 +313,10 @@ function Checkbox(props: ToggleInputProps) {
           useAnimatedStyle(() => ({ opacity: withTiming(on ? 1 : 0) }), [on]),
         ]}
       >
-        <Image
-          source={checkboxIcon ? iconRegistry[checkboxIcon] : iconRegistry.check}
+        <Icon
+          icon={checkboxIcon || "check"}
+          color={iconTintColor}
+          size={20}
           style={[
             $checkboxDetail,
             !!iconTintColor && { tintColor: iconTintColor },
@@ -543,9 +544,10 @@ function SwitchAccessibilityLabel(props: ToggleInputProps & { role: "on" | "off"
       )}
 
       {switchAccessibilityMode === "icon" && shouldLabelBeVisible && (
-        <Image
-          style={[$switchAccessibilityIcon, { tintColor: color }]}
-          source={role === "off" ? iconRegistry.hidden : iconRegistry.view}
+        <Icon
+          icon={role === "off" ? "hidden" : "view"}
+          // color={color}
+          size={14}
         />
       )}
     </View>
@@ -681,11 +683,6 @@ const $switchAccessibility: TextStyle = {
   alignItems: "center",
 }
 
-const $switchAccessibilityIcon: ImageStyle = {
-  width: 14,
-  height: 14,
-  resizeMode: "contain",
-}
 
 const $switchAccessibilityLine: ViewStyle = {
   width: 2,

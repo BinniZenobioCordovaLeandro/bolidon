@@ -4,19 +4,15 @@ import { openLinkInBrowser } from "app/utils/openLinkInBrowser"
 import React, { FC, ReactElement, useEffect } from "react"
 import {
   ActivityIndicator,
-  Image,
-  ImageStyle,
   SectionList,
   TextStyle,
   View,
   ViewStyle,
 } from "react-native"
-import { ListItem, Screen, Text } from "../../components"
+import { Icon, ListItem, Screen, Text } from "../../components"
 import { TxKeyPath, isRTL } from "../../i18n"
 import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
 import { spacing } from "../../theme"
-
-const reactNativeLiveLogo = require("../../../assets/images/demo/rnl-logo.png")
 
 export interface Demo {
   name: string
@@ -72,7 +68,7 @@ export const ComponentsScreen: FC<HomeTabScreenProps<"Components">> = function C
               rightIcon={isRTL ? "caretLeft" : "caretRight"}
               LeftComponent={
                 <View style={$logoContainer}>
-                  <Image source={reactNativeLiveLogo} style={$logo} />
+                  <Icon icon="offers" size={40} />
                 </View>
               }
               onPress={() => openLinkInBrowser("")}
@@ -100,11 +96,6 @@ export const ComponentsScreen: FC<HomeTabScreenProps<"Components">> = function C
       />
     </Screen>
   )
-}
-
-const $logo: ImageStyle = {
-  height: 38,
-  width: 38,
 }
 
 const $logoContainer: ViewStyle = {

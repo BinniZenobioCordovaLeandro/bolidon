@@ -32,7 +32,7 @@ export const PhotoGallery = observer(function PhotoGallery(props: PhotoGalleryPr
     <View style={[$wrap, containerStyle]}>
       {photos &&
         photos.map((item) => (
-          <View key={item}>
+          <View key={item} style={$imageContainer}>
             <Icon icon="x" style={$photoItemDelete} onPress={() => setPhotos(photos.filter((photo) => photo !== item))} />
             <Image
               style={$photoItem}
@@ -51,6 +51,10 @@ export const PhotoGallery = observer(function PhotoGallery(props: PhotoGalleryPr
   )
 })
 
+const $imageContainer: ViewStyle = {
+  position: "relative",
+}
+
 const $photoItem: ImageStyle = {
   width: 120,
   height: 120,
@@ -60,6 +64,5 @@ const $photoItem: ImageStyle = {
 
 const $photoItemDelete: ImageStyle = {
   position: "absolute",
-  alignSelf: "center",
   zIndex: 1,
 }

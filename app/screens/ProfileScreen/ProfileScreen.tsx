@@ -1,10 +1,11 @@
 import React, { FC } from "react"
 import { Linking, TextStyle, View, ViewStyle } from "react-native"
-import { Button, Screen, Text } from "../../components"
+import { Button, Icon, ListItem, Screen, Text } from "../../components"
 import { isRTL } from "../../i18n"
 import { useStores } from "../../models"
 import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
 import { colors, spacing } from "../../theme"
+import { $logoContainer } from "../HomeScreen/styles"
 import { $title } from "../styles"
 
 function openLinkInBrowser(url: string) {
@@ -27,6 +28,17 @@ export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function Profile
       />
       <Text style={$title} preset="heading" tx="ProfileScreen.title" />
       <Text text={authEmail} preset="subheading" />
+      <ListItem
+        tx="ProfileScreen.profile"
+        bottomSeparator
+        rightIcon={isRTL ? "caretLeft" : "caretRight"}
+        LeftComponent={
+          <View style={$logoContainer}>
+            <Icon icon="offers" size={40} />
+          </View>
+        }
+        onPress={() => openLinkInBrowser("")}
+      />
       <View style={$buttonContainer}>
         <Button style={$button} tx="common.logOut" onPress={logout} />
       </View>
@@ -51,5 +63,5 @@ const $button: ViewStyle = {
 }
 
 const $buttonContainer: ViewStyle = {
-  marginBottom: spacing.md,
+  marginVertical: spacing.xxxl,
 }
