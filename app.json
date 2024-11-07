@@ -38,7 +38,7 @@
         "resizeMode": "contain",
         "backgroundColor": "#FFFFFF"
       },
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./credentials/google-services.json"
     },
     "ios": {
       "buildNumber": "5",
@@ -51,7 +51,7 @@
         "resizeMode": "contain",
         "backgroundColor": "#FFFFFF"
       },
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "googleServicesFile": "./credentials/GoogleService-Info.plist"
     },
     "web": {
       "favicon": "./assets/images/app-icon-web-favicon.png",
@@ -68,6 +68,7 @@
         "expo-build-properties",
         {
           "ios": {
+            "useFrameworks": "static",
             "newArchEnabled": false,
             "deploymentTarget": "13.4"
           },
@@ -94,7 +95,9 @@
         {
           "photosPermission": "La aplicación necesita permiso para acceder a tus fotos"
         }
-      ]
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth"
     ],
     "experiments": {
       "tsconfigPaths": true

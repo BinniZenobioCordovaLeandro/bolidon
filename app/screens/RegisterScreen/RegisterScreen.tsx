@@ -1,12 +1,11 @@
+import { useStores } from "app/models";
+import { AppStackScreenProps } from "app/navigators";
+import { Auth } from "app/services/api";
+import { colors, spacing } from "app/theme";
 import { observer } from "mobx-react-lite";
 import React, { ComponentType, FC, useMemo, useRef, useState } from "react";
-import { AppStackScreenProps } from "app/navigators";
+import { TextInput, TextStyle, ViewStyle } from "react-native";
 import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../../components";
-import { colors, spacing } from "app/theme";
-import { TextStyle, ViewStyle } from "react-native";
-import { useStores } from "app/models";
-import { TextInput } from "react-native-gesture-handler";
-import { Auth } from "app/services/api";
 
 interface RegisterScreenProps extends AppStackScreenProps<"Register"> { }
 
@@ -29,12 +28,9 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
 
     const submit = async () => {
         setIsSubmitted(true)
-        if (authPassword !== confirmAuthPassword) {
-            // Show error message
-        }
-        const response = await Auth.registerCredential(authEmail, authPassword);
-        console.log("register", response);
-        navigation.navigate("Login")
+        if (authPassword !== confirmAuthPassword) return null;
+        const created = await Auth.registerCredential(authEmail, authPassword);
+        if (created) navigation.navigate("Login")
     }
 
     const PasswordRightAccessory: ComponentType<TextFieldAccessoryProps> = useMemo(

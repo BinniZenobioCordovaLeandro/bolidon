@@ -1,29 +1,29 @@
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { googleAuth } from "./auth/google";
 
+const auth = getAuth();
+
 export const Auth = {
-    registerCredential: async (email: string, password: string) => {
+    registerCredential: async (email: string, password: string): Promise<boolean> => {
         try {
-            const credential = await (() => "registerCredential")();
-            console.log("registerCredential", credential, email, password);
-            return credential;
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            if (user) return true;
         } catch (error) {
             console.error(error);
+            return false;
         }
     },
-    signInWithCredential: async (email: string, password: string): Promise<{ token: string; user: { email: string; isCollaborator: boolean; }; }> => {
+    signInWithCredential: async (email: string, password: string): Promise<{ token: string, user: { email: string, isCollaborator: boolean } }> => {
         try {
-            // const credential = auth.signInWithEmailAndPassword(email, password);
-            if (email === "" || password === "") return;
-            if (email === "service@gmail.com" && password === "service")
-                return {
-                    token: "service",
-                    user: { email, isCollaborator: true },
-                };
-            if (email === "client@gmail.com" && password === "client")
-                return {
-                    token: "client",
-                    user: { email, isCollaborator: false },
-                };
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            const token = await user.getIdToken();
+
+            return {
+                token,
+                user: { email, isCollaborator: false },
+            }
         } catch (error) {
             console.error(error);
         }
