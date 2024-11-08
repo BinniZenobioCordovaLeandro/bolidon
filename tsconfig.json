@@ -30,6 +30,9 @@
       "assets/*": [
         "./assets/*"
       ],
+      "@firebase/auth": [
+        "./node_modules/@firebase/auth/dist/index.rn.d.ts"
+      ],
     }
   },
   "extends": "expo/tsconfig.base",
@@ -47,7 +50,8 @@
     "app",
     "types",
     "plugins",
-    "app.config.ts"
+    "app.config.ts",
+    "app/config/firebase.ts"
   ],
   "exclude": [
     "node_modules",

@@ -55,6 +55,7 @@ const en = {
       "Ingresa tu correo y contraseña para acceder a tu cuenta. Si no tienes una cuenta, puedes crear una.",
     emailFieldLabel: "Email",
     passwordFieldLabel: "Password",
+    forgotPassword: "Olvidaste tu contraseña?",
     emailFieldPlaceholder: "Ingresa tu correo",
     passwordFieldPlaceholder: "Ingresa tu contraseña",
     tapToLogIn: "Ingresar",
@@ -62,6 +63,8 @@ const en = {
     tapToLogInWithGoogle: "Ingresar con Google",
     tapToLogInWithFacebook: "Ingresar con Facebook",
     hint: "Puedes usar tu correo y contraseña o tus redes sociales para ingresar.",
+    linkSent: "El link para restablecer tu contraseña ha sido enviado a tu correo.",
+    linkNotSent: "No se pudo enviar el link para restablecer tu contraseña.",
   },
   registerScreen: {
     register: "Registrate",

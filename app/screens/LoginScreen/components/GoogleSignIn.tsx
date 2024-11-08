@@ -16,7 +16,7 @@ export const GoogleSignIn = observer(function GoogleSignIn() {
   } = useStores()
 
   const [, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: "1080449776857-757rbket5frqmjkp04r21f59j0hv48it.apps.googleusercontent.com",
+    androidClientId: "1080449776857-8mg2g0hnicakv31p7sogl4nqpgeo7js9.apps.googleusercontent.com",
     iosClientId: "1080449776857-igqbhbsrq7kpcpinkaq2o19nd5tonrbf.apps.googleusercontent.com",
     webClientId: "1080449776857-757rbket5frqmjkp04r21f59j0hv48it.apps.googleusercontent.com",
   });

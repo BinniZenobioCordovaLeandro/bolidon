@@ -10,7 +10,7 @@
     "name": "bolidon",
     "slug": "bolidon",
     "scheme": "bolidon",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-all.png",
     "splash": {
@@ -26,7 +26,7 @@
       "**/*"
     ],
     "android": {
-      "versionCode": 5,
+      "versionCode": 6,
       "icon": "./assets/images/app-icon-android-legacy.png",
       "package": "com.bolidon.app",
       "adaptiveIcon": {
@@ -41,7 +41,7 @@
       "googleServicesFile": "./credentials/google-services.json"
     },
     "ios": {
-      "buildNumber": "5",
+      "buildNumber": "6",
       "icon": "./assets/images/app-icon-ios.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.bolidon.app",
@@ -51,7 +51,16 @@
         "resizeMode": "contain",
         "backgroundColor": "#FFFFFF"
       },
-      "googleServicesFile": "./credentials/GoogleService-Info.plist"
+      "googleServicesFile": "./credentials/GoogleService-Info.plist",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.1080449776857-igqbhbsrq7kpcpinkaq2o19nd5tonrbf"
+            ]
+          }
+        ]
+      }
     },
     "web": {
       "favicon": "./assets/images/app-icon-web-favicon.png",

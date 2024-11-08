@@ -22,6 +22,7 @@ import * as Notifications from 'expo-notifications'
 import React, { useEffect, useRef } from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import Config from "./config"
+import { initFirebaseApp } from "./config/firebase"
 import "./i18n"
 import { registerForPushNotificationsAsync } from "./messaging/notifications"
 import { useInitialRootStore } from "./models"
@@ -76,6 +77,7 @@ function App(props: AppProps) {
   const responseListener = useRef<Notifications.Subscription>();
 
   useEffect(() => {
+    initFirebaseApp()
     console.log("🎸 registering for push notifications");
     registerForPushNotificationsAsync()
       .then(token => console.log("token:", token))

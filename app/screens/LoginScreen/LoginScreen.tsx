@@ -21,7 +21,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attemptsCount, setAttemptsCount] = useState(0)
   const {
-    authenticationStore: { authEmail, setAuthEmail, validationError, authenticate },
+    authenticationStore: { message, authEmail, setAuthEmail, validationError, authenticate, forgotPassword },
   } = useStores()
 
   useEffect(() => {
@@ -86,6 +86,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       <Text testID="login-heading" tx="loginScreen.logIn" preset="heading" style={$logIn} />
       <Text tx="loginScreen.enterDetails" preset="subheading" style={$enterDetails} />
       {attemptsCount > 2 && <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />}
+      {message.length > 0 && <Text tx={`loginScreen.`+message} size="sm" weight="light" style={$hint} />}
 
       <TextField
         value={authEmail}
@@ -115,6 +116,8 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         onSubmitEditing={login}
         RightAccessory={PasswordRightAccessory}
       />
+      <Text tx="loginScreen.forgotPassword" style={$register} onPress={forgotPassword} />
+
       <Button
         testID="login-button"
         tx="loginScreen.tapToLogIn"

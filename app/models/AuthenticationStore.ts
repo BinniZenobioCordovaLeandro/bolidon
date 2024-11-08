@@ -4,6 +4,7 @@ import { Instance, SnapshotOut, types } from "mobx-state-tree"
 export const AuthenticationStoreModel = types
   .model("AuthenticationStore")
   .props({
+    message: types.optional(types.string, ""),
     authToken: types.maybe(types.string),
     authEmail: "",
     isCollaborator: types.optional(types.boolean, false),
@@ -25,7 +26,7 @@ export const AuthenticationStoreModel = types
   }))
   .actions((store) => ({
     async authenticate(password: string) {
-      const { token, user } = await Auth.signInWithCredential(store.authEmail, password)
+      const { token, user } = await Auth.signInWithCredentials(store.authEmail, password)
       console.log("authenticate", token);
       this.setAuthToken(String(Date.now()), user.isCollaborator)
       return true;
@@ -39,6 +40,14 @@ export const AuthenticationStoreModel = types
       const user = await Auth.registerCredential(store.authEmail, password);
       console.log("register", user);
       return !!user
+    },
+    async forgotPassword() {
+      const mailSended = await Auth.forgotPassword(store.authEmail)
+      this.setMessage(mailSended ? "linkSent" : "linkNotSent")
+      return mailSended
+    },
+    setMessage (message: string) {
+      store.message = message
     },
     setAuthToken(value?: string, isCollaborator = false) {
       store.authToken = value

@@ -2,9 +2,7 @@ import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 import { spacing } from "../../../theme";
 
 export const $carImage: ImageStyle = {
-  alignSelf: "auto",
-  width: "100%",
-  height: 200,
+  alignSelf: "stretch",
 }
 
 export const $container: ViewStyle = {

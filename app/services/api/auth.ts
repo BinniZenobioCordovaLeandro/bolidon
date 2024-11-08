@@ -1,9 +1,18 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, sendPasswordResetEmail, signInWithCredential, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { googleAuth } from "./auth/google";
 
 const auth = getAuth();
 
 export const Auth = {
+    forgotPassword: async (email: string): Promise<boolean> => {
+        try {
+            await sendPasswordResetEmail(auth, email);
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    },
     registerCredential: async (email: string, password: string): Promise<boolean> => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -14,7 +23,7 @@ export const Auth = {
             return false;
         }
     },
-    signInWithCredential: async (email: string, password: string): Promise<{ token: string, user: { email: string, isCollaborator: boolean } }> => {
+    signInWithCredentials: async (email: string, password: string): Promise<{ token: string, user: { email: string, isCollaborator: boolean } }> => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
@@ -30,8 +39,10 @@ export const Auth = {
     },
     signInWithGoogle: async (token: string) => {
         try {
-            const { user } = await googleAuth.getUserInfoGoogle(token);
-            console.log("signInWithGoogle", user);
+            const user = await googleAuth.getUserInfoGoogle(token);
+            const googleCredential =  GoogleAuthProvider.credential(token);
+            const userCredential = signInWithCredential(auth, googleCredential);
+            console.log("🎸 userCredential", userCredential);
             return {
                 token,
                 user,
@@ -41,10 +52,6 @@ export const Auth = {
         }
     },
     signOut: async () => {
-        try {
-            console.log("signOut");
-        } catch (error) {
-            console.error(error);
-        }
+        signOut(auth);
     }
 }

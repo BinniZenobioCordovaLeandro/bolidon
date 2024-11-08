@@ -14,7 +14,9 @@ export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_p
 
       <AutoImage source={{
         uri: "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
-      }} style={$carImage} />
+      }} style={$carImage}
+        maxWidth={400}
+      />
 
       <ListItem
         tx="HomeScreen.offers"

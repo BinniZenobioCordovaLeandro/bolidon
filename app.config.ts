@@ -1,4 +1,4 @@
-import { ExpoConfig, ConfigContext } from "@expo/config"
+import { ConfigContext, ExpoConfig } from "@expo/config"
 
 /**
  * Use ts-node here so we can use TypeScript for our Config Plugins
@@ -23,11 +23,11 @@ module.exports = ({ config }: ConfigContext): Partial<ExpoConfig> => {
     ],
     android: {
       ...config.android,
-      googleServicesFile: process.env.GOOGLE_SERVICES,
+      // googleServicesFile: process.env.GOOGLE_SERVICES,
     },
     ios: {
       ...config.ios,
-      googleServicesFile: process.env.GOOGLE_SERVICE_INFO,
+      // googleServicesFile: process.env.GOOGLE_SERVICE_INFO,
     },
     platforms: ["ios", "android", "web"],
   }
