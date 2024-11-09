@@ -15,6 +15,7 @@ function openLinkInBrowser(url: string) {
 export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function ProfileScreen(
   _props,
 ) {
+  const { navigation } = _props
   const {
     authenticationStore: { logout, authEmail, isCollaborator },
   } = useStores()
@@ -37,7 +38,7 @@ export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function Profile
             <Icon icon="person" size={40} />
           </View>
         }
-        onPress={() => openLinkInBrowser("")}
+        onPress={() => navigation.navigate("User")}
       />
       {
         isCollaborator && (

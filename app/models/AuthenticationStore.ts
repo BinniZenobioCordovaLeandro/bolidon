@@ -1,5 +1,7 @@
+import { apiAuth } from "@/services/api/apiAuth"
 import { Auth } from "app/services/api"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import { User, UserModel } from "./User"
 
 export const AuthenticationStoreModel = types
   .model("AuthenticationStore")
@@ -8,6 +10,7 @@ export const AuthenticationStoreModel = types
     authToken: types.maybe(types.string),
     authEmail: "",
     isCollaborator: types.optional(types.boolean, false),
+    user: types.maybe(UserModel),
   })
   .views((store) => ({
     get isCollaboratorRole() {
@@ -26,9 +29,14 @@ export const AuthenticationStoreModel = types
   }))
   .actions((store) => ({
     async authenticate(password: string) {
-      const { token, user } = await Auth.signInWithCredentials(store.authEmail, password)
+      const response = await Auth.signInWithCredentials(store.authEmail, password)
+      if (!response) {
+        this.setMessage("invalidCredentials")
+        return false
+      }
+      const { token, user } = response
       console.log("authenticate", token);
-      this.setAuthToken(String(Date.now()), user.isCollaborator)
+      this.setAuthToken(token, user.isCollaborator)
       return true;
     },
     async authenticateWithGoogle(token: string) {
@@ -56,10 +64,19 @@ export const AuthenticationStoreModel = types
     setAuthEmail(value: string) {
       store.authEmail = value.replace(/ /g, "")
     },
+    setUser(user: User | undefined) {
+      store.user = user
+    },
     logout() {
       store.authToken = undefined
       store.authEmail = ""
+      store.isCollaborator = false
+      this.setUser(undefined)
       Auth.signOut()
+    },
+    updateUser: (data: User) => {
+      const newData = apiAuth.updateUser(store.authToken!, data)
+      this.setUser(newData)
     },
   }))
 

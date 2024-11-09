@@ -47,6 +47,7 @@ export const VehicleModel = types
 export interface Vehicle extends Instance<typeof VehicleModel> { }
 export interface VehicleSnapshotOut extends SnapshotOut<typeof VehicleModel> { }
 export interface VehicleSnapshotIn extends SnapshotIn<typeof VehicleModel> { }
+
 export const createVehicleDefaultModel = () => types.optional(VehicleModel, {
   guid: "",
   plate: undefined,
@@ -60,4 +61,4 @@ export const createVehicleDefaultModel = () => types.optional(VehicleModel, {
   photos: []
 })
 
-export const createVehicleModel = (data: VehicleSnapshotIn) => VehicleModel.create(data)
+export const createVehicleModel = (data: VehicleSnapshotIn): Vehicle => VehicleModel.create(data)

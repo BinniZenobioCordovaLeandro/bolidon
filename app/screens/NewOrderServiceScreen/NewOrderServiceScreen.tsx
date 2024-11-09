@@ -1,4 +1,5 @@
 import { Button, PhotoGalleryControlled, Screen, Text, Toggle } from "@/components";
+import { DatePickerControlled } from "@/components/DatePicker/DatePickerControlled";
 import { SelectableControlled } from "@/components/Selectable/SelectableControlled";
 import { TextFieldControlled } from "@/components/TextField/TextFieldControlled";
 import { useReactForm } from "@/hooks/useForm";
@@ -73,7 +74,7 @@ export const NewOrderServiceScreen: FC<NewOrderServiceScreenProps> = observer(fu
           tx="NewOrderServiceScreen.addOtherComponent"
           style={$iconAddComponentField}
           onPress={() => {
-            console.log("🎁 add component");
+            console.log("🎁 add other component");            
           }}
         />
       </View>
@@ -89,14 +90,21 @@ export const NewOrderServiceScreen: FC<NewOrderServiceScreenProps> = observer(fu
         labelTx="NewOrderServiceScreen.priceFieldLabel"
         placeholderTx="NewOrderServiceScreen.priceFieldPlaceholder"
       />
+      <Text preset="default" tx="NewOrderServiceScreen.estimatedDueDateFieldLabel" />
+      <DatePickerControlled
+        name="estimatedDueDate"
+        control={control}
+        containerStyle={$textField}
+      />
+      <View style={$headerSeparator} />
       <Toggle
         value={termsAndConditions}
         onValueChange={settermsAndConditions}
         labelTx="NewOrderServiceScreen.termsAndConditions"
         labelPosition="left"
         variant="switch"
+        containerStyle={$textField}
       />
-      <View style={$headerSeparator} />
       <Button
         disabled={!termsAndConditions}
         tx="NewOrderServiceScreen.submitButton"

@@ -1,5 +1,6 @@
-import React, { FC } from "react"
-import { View } from "react-native"
+import { useStores } from "@/models"
+import React, { FC, useEffect, useState } from "react"
+import { ActivityIndicator, View } from "react-native"
 import { AutoImage, Icon, ListItem, Screen, Text } from "../../components"
 import { isRTL } from "../../i18n"
 import { HomeTabScreenProps } from "../../navigators/HomeNavigator"
@@ -7,16 +8,39 @@ import { $carImage, $container, $logoContainer, $tagline, $title } from "./style
 
 export const HomeScreen: FC<HomeTabScreenProps<"Home">> = function HomeScreen(_props) {
   const { navigation } = _props
+  const { vehicleStore: {
+    vehiclesForList,
+    fetchVehicles,
+  } } = useStores()
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    ; (async function load() {
+      setIsLoading(true)
+      await fetchVehicles()
+      setIsLoading(false)
+    })()
+  }, [])
+
   return (
     <Screen preset="scroll" contentContainerStyle={$container} safeAreaEdges={["top"]}>
       <Text preset="heading" tx="HomeScreen.title" style={$title} />
       <Text tx="HomeScreen.tagLine" style={$tagline} />
 
-      <AutoImage source={{
-        uri: "https://www.prorack.com.au/sites/aufiles/files/styles/cars_list/public/17219.jpg",
-      }} style={$carImage}
-        maxWidth={400}
-      />
+      {
+        isLoading ? (
+          <View>
+            <ActivityIndicator size="large" />
+          </View>
+        ) : (
+          <View>
+            {vehiclesForList.map((vehicle) => (
+              <AutoImage key={vehicle.guid} source={{uri: vehicle.thumbnail}} style={$carImage} maxWidth={400} />
+            ))}
+          </View>
+        )
+      }
 
       <ListItem
         tx="HomeScreen.offers"

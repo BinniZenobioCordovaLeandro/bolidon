@@ -168,11 +168,18 @@ const en = {
     photosFieldLabel: "Fotos",
     photosFieldPlaceholder: "Agrega fotos del problema",
     termsAndConditions: "Acepto los terminos y condiciones",
+    estimatedDueDateFieldLabel: "Fecha recomendada para el servicio",
     submitButton: "Registrar orden de servicio",
   },
   OffersScreen: {
     title: "Ofertas",
     description: "Aprovecha las ofertas y promociones de nuestros talleres aliados.",
+  },
+  UserScreen: {
+    title: "Perfil",
+    nameFieldLabel: "Nombre",
+    nameFieldPlaceholder: "Ingresa tu nombre",
+    submitButton: "Actualizar perfil",
   },
   AssistedDiagnosisScreen: {
     title: "Diagnostica con Inteligencia Artificial",

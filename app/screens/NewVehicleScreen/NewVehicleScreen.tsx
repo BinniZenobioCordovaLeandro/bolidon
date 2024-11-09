@@ -16,13 +16,13 @@ export const NewVehicleScreen: FC<NewVehicleScreenProps> = observer(function New
   const { handleSubmit, control } = useReactForm(vehicleSchema);
 
   const {
-    vehicleStore: { createVehicle: registerVehicle }
+    vehicleStore: { createVehicle }
   } = useStores();
 
   const [photos, setPhotos] = React.useState<string[]>([]);
 
   const onSubmitHandler = async (data: any) => {
-    await registerVehicle({
+    await createVehicle({
       ...data,
       photos,
     });

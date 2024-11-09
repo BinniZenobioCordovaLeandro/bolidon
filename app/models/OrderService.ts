@@ -7,14 +7,12 @@ import { withSetPropAction } from "./helpers/withSetPropAction"
 
 export const orderServiceSchema = zod.object({
   title: zod.string().min(6, "Title must be at least 6 characters"),
-  subtitle: zod.string().min(6, "Subtitle must be at least 6 characters"),
-  pubDate: zod.string().min(6, "Publication date must be at least 6 characters"),
   kilometers: zod.coerce.number().min(0, "Kilometers must be at least 0"),
-  thumbnail: zod.string().min(6, "Thumbnail must be at least 6 characters"),
   description: zod.string().min(6, "Description must be at least 6 characters"),
   components: zod.array(componentSchema),
   photos: zod.array(zod.string().min(1, "Photos must be at least 6 characters")),
   price: zod.coerce.number().min(0, "Price must be at least 0"),
+  estimatedDueDate: zod.string().optional(),
 });
 
 export const OrderServiceModel = types
@@ -22,14 +20,13 @@ export const OrderServiceModel = types
   .props({
     guid: types.identifier,
     title: types.maybeNull(types.string),
-    subtitle: types.maybeNull(types.string),
-    pubDate: types.string,
     kilometers: types.integer,
-    thumbnail: types.maybeNull(types.string),
     description: types.maybeNull(types.string),
     components: types.array(ComponentModel),
     photos: types.array(types.string),
     price: types.integer,
+    estimatedDueDate: types.maybeNull(types.string),
+    pubDate: types.string,
   })
   .actions(withSetPropAction)
   .views((orderService) => ({
@@ -62,4 +59,16 @@ export const OrderServiceModel = types
 export interface OrderService extends Instance<typeof OrderServiceModel> { }
 export interface OrderServiceSnapshotOut extends SnapshotOut<typeof OrderServiceModel> { }
 export interface OrderServiceSnapshotIn extends SnapshotIn<typeof OrderServiceModel> { }
-export const createOrderServiceDefaultModel = () => types.optional(OrderServiceModel, {})
+export const createOrderServiceDefaultModel = () => types.optional(OrderServiceModel, {
+  guid: "0",
+  title: "",
+  kilometers: 0,
+  description: "",
+  components: [],
+  photos: [],
+  price: 0,
+  estimatedDueDate: "",
+  pubDate: new Date().toISOString(),
+})
+
+export const createOrderServiceModel = (data: OrderServiceSnapshotIn): OrderService => OrderServiceModel.create(data)
