@@ -259,6 +259,17 @@ const en = {
     photos: "Evidencias",
     submitButton: "Agendar cita",
   },
+  NewOfferScreen: {
+    title: "Crear oferta",
+    titleFieldLabel: "Titulo",
+    titleFieldPlaceholder: "Ingresa el titulo de la oferta",
+    descriptionFieldLabel: "Descripcion",
+    descriptionFieldPlaceholder: "Ingresa una descripcion detallada de la oferta",
+    priceFieldLabel: "Precio",
+    priceFieldPlaceholder: "Ingresa el precio de la oferta",
+    submitButton: "Crear oferta",
+    termsAndConditions: "La oferta es valida por 7 dias",
+  },
 
   ...demoEn,
 }

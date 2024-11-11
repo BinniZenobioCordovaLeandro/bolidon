@@ -52,6 +52,7 @@ export type AppStackParamList = {
   Offers: undefined
   Profile: undefined
 	User: undefined
+	NewOffer: undefined
 	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -123,6 +124,7 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="Offers" component={Screens.OffersScreen} options={generateOptions} />
       <Stack.Screen name="Profile" component={Screens.ProfileScreen} />
 			<Stack.Screen name="User" component={Screens.UserScreen} options={generateOptions} />
+			<Stack.Screen name="NewOffer" component={Screens.NewOfferScreen} options={generateOptions} />
 			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

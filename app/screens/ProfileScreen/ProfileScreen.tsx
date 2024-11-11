@@ -52,7 +52,7 @@ export const ProfileScreen: FC<HomeTabScreenProps<"Profile">> = function Profile
                   <Icon icon="offers" size={40} />
                 </View>
               }
-              onPress={() => openLinkInBrowser("")}
+              onPress={() => navigation.navigate("NewOffer")}
             />
           </>
         )

@@ -15,3 +15,4 @@ export * from "./UserScreen/UserScreen"
 export * from "./VehiclesScreen/VehiclesScreen"
 export * from "./WelcomeScreen/WelcomeScreen"
 
+export * from "./NewOfferScreen"

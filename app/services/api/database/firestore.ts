@@ -1,4 +1,4 @@
-import { createUserModel, createVehicleModel, UserSnapshotIn, UserSnapshotOut, VehicleSnapshotIn, VehicleSnapshotOut } from "@/models";
+import { createOfferModel, createUserModel, createVehicleModel, OfferSnapshotIn, UserSnapshotIn, UserSnapshotOut, VehicleSnapshotIn, VehicleSnapshotOut } from "@/models";
 import { ComponentSnapshotIn } from "@/models/Component";
 import { createOrderServiceModel, OrderServiceSnapshotIn } from "@/models/OrderService";
 import { getDocs, getFirestore } from "@react-native-firebase/firestore";
@@ -123,6 +123,39 @@ export const apiDatabase = {
     } catch (error) {
       console.error("🚗 createOrderService", error);
       return {} as OrderServiceSnapshotIn;
+    }
+  },
+  offers: async (): Promise<OfferSnapshotIn[]> => {
+    const collection =  database.collection("offers");
+    const docs = await getDocs(collection);
+    const data: OfferSnapshotIn[] = [];
+    docs.forEach(doc => {
+      const docData = doc.data();
+      data.push(createOfferModel({
+        guid: doc.id,
+        title: docData.title,
+        description: docData.description,
+        price: docData.price,
+      }));
+    });
+    console.log("🚗 offers", data)
+    return data;
+  },
+  createOffer: async (offer: OfferSnapshotIn): Promise<OfferSnapshotIn> => {
+    try {
+      const collection =  database.collection("offers");
+      const documentRef = await collection.add(offer);
+      const doc = await documentRef.get();
+      const docData = doc.data();
+      return createOfferModel({
+        guid: doc.id,
+        title: docData?.title,
+        description: docData?.description,
+        price: docData?.price,
+      });
+    } catch (error) {
+      console.error("🚗 createOffer", error);
+      return {} as OfferSnapshotIn;
     }
   },
 }

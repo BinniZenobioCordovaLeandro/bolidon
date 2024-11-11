@@ -6,7 +6,7 @@
  * documentation for more details.
  */
 import { ApisauceInstance, create } from "apisauce"
-import { VehicleSnapshotIn, VehicleSnapshotOut } from "app/models"
+import { OfferSnapshotIn, VehicleSnapshotIn, VehicleSnapshotOut } from "app/models"
 import { ComponentSnapshotIn } from "app/models/Component"
 import Config from "../../config"
 import type { OrderServiceSnapshotIn } from "../../models/OrderService"
@@ -81,6 +81,26 @@ export class Api {
       const components: ComponentSnapshotIn[] = await apiDatabase.components();
       console.log("🎸 components", components);
       return { kind: "ok", components }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+
+  async getOffers(): Promise<{ kind: "ok"; offers: OfferSnapshotIn[] } | GeneralApiProblem> {
+    try {
+      const offers: OfferSnapshotIn[] = await apiDatabase.offers();
+      console.log("🎁 offers", offers);
+      return { kind: "ok", offers }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+
+  async createOffer(_offer: OfferSnapshotIn): Promise<{ kind: "ok"; offer: OfferSnapshotIn } | GeneralApiProblem> {
+    try {
+      const offer: OfferSnapshotIn = await apiDatabase.createOffer(_offer);
+      console.log("🎁 offer", offer);
+      return { kind: "ok", offer }
     } catch {
       return { kind: "bad-data" }
     }
