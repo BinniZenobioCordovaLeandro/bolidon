@@ -48,17 +48,17 @@ export interface Vehicle extends Instance<typeof VehicleModel> { }
 export interface VehicleSnapshotOut extends SnapshotOut<typeof VehicleModel> { }
 export interface VehicleSnapshotIn extends SnapshotIn<typeof VehicleModel> { }
 
-export const createVehicleDefaultModel = () => types.optional(VehicleModel, {
-  guid: "",
-  plate: undefined,
-  brand: undefined,
-  model: undefined,
-  year: undefined,
-  color: undefined,
-  kilometers: undefined,
-  engine: undefined,
-  transmission: undefined,
-  photos: []
-})
-
-export const createVehicleModel = (data: VehicleSnapshotIn): Vehicle => VehicleModel.create(data)
+export const createVehicleModel = (data: VehicleSnapshotIn): Vehicle => {
+  return VehicleModel.create({
+    guid: data.guid || "",
+    plate: data.plate || "",
+    brand: data.brand || "",
+    model: data.model || "",
+    year: data.year || 0,
+    color: data.color || "",
+    kilometers: data.kilometers || 0,
+    engine: data.engine || "",
+    transmission: data.transmission || "",
+    photos: data.photos || [],
+  })
+}

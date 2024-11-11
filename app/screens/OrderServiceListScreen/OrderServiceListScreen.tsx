@@ -1,9 +1,11 @@
+import { spacing } from "@/theme"
 import { observer } from "mobx-react-lite"
 import React, { FC, useEffect } from "react"
 import {
   ActivityIndicator,
   ImageStyle,
   View,
+  ViewStyle,
 } from "react-native"
 import {
   EmptyState,
@@ -115,13 +117,20 @@ export const OrderServiceScreen: FC<HomeTabScreenProps<"OrderServiceList">> = ob
                   </View>
                 )
               }
-              <View style={$row}>
-                <Text preset="heading" tx="demoPodcastListScreen.title" />
-                <Icon
-                  icon="addCircleOutline"
-                  onPress={() => navigation.navigate("NewOrderService")}
-                />
-              </View>
+              {
+                isCollaborator && (
+                  <View style={$separator} />
+                )
+              }
+              {isCollaborator && (
+                <View style={$row}>
+                  <Text preset="heading" tx="demoPodcastListScreen.title" />
+                  <Icon
+                    icon="addCircleOutline"
+                    onPress={() => navigation.navigate("NewOrderService")}
+                  />
+                </View>
+              )}
               {(favoritesOnly || orderServicesForList.length > 0) && (
                 <View style={$toggle}>
                   <Toggle
@@ -161,4 +170,8 @@ const $iconCloseVehicle: ImageStyle = {
   top: 0,
   right: 0,
   padding: 10,
+}
+
+const $separator: ViewStyle = {
+  height: spacing.xl,
 }

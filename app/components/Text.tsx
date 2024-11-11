@@ -107,6 +107,8 @@ const $presets = {
   formHelper: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.normal] as StyleProp<TextStyle>,
 
   error: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.normal, { color: colors.error }] as StyleProp<TextStyle>,
+
+  caption: [$baseStyle, $sizeStyles.xxs, $fontWeightStyles.normal] as StyleProp<TextStyle>,
 }
 
 const $rtlStyle: TextStyle = isRTL ? { writingDirection: "rtl" } : {}

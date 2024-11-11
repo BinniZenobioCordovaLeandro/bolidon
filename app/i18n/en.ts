@@ -34,9 +34,9 @@ const en = {
   },
   emptyStateComponent: {
     generic: {
-      heading: "So empty... so sad",
-      content: "No data found yet. Try clicking the button to refresh or reload the app.",
-      button: "Let's try this again",
+      heading: "Oh no, está vacío...",
+      content: "No encontramos ningún dato. Intenta refrescar o recargar la aplicación para ver si aparece algo nuevo.",
+      button: "Volver a refrescar",
     },
   },
   PhotoGalleryComponent: {
@@ -142,9 +142,8 @@ const en = {
       durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
     },
     noFavoritesEmptyState: {
-      heading: "This looks a bit empty",
-      content:
-        "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
+      heading: "Esto se ve un poco vacío",
+      content: "Aún no se han añadido favoritos. ¡Toca el corazón para añadir a tus favoritos!",
     },
   },
   NewOrderServiceScreen: {
@@ -157,10 +156,13 @@ const en = {
     subtitleFieldPlaceholder: "Ingresa una descripcion del servicio",
     componentsCardTitle: "Lista de componentes para el servicio",
     componentsCardDescription: "Ingresa los componentes que deseas revisar o cambiar en tu vehiculo.",
+    addComponentCardTitle: "Agregar componente",
     componentFieldLabel: "Componente",
     componentFieldPlaceholder: "Ingresa el componente",
     urgencyLevelFieldLabel: "¿Es urgente cambiar este componente?",
-    addOtherComponent: "Agregar otro componente",
+    notesFieldLabel: "Nota adicional",
+    notesFieldPlaceholder: "Ingresa notas adicionales",
+    addOtherComponent: "Registrar componente",
     priceFieldLabel: "Precio aproximado",
     priceFieldPlaceholder: "Ingresa el precio del servicio",
     photosTitle: "Fotos de tu vehiculo",
@@ -246,10 +248,16 @@ const en = {
       durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
     },
     noFavoritesEmptyState: {
-      heading: "This looks a bit empty",
-      content:
-        "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
+      heading: "Esto se ve un poco vacío",
+      content: "Aún no se han añadido favoritos. ¡Toca el corazón para añadir a tus favoritos!",
     },
+  },
+  OrderServiceDetailScreen: {
+    kilometers: "Realiza a los %{kilometers} kilometros",
+    estimatedDueDate: "Fecha de orden: %{date} para el servicio",
+    components: "Componentes para cambio",
+    photos: "Evidencias",
+    submitButton: "Agendar cita",
   },
 
   ...demoEn,

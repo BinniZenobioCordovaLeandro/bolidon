@@ -6,10 +6,8 @@ import {
     ImageSourcePropType,
     ImageStyle,
     Platform,
-    StyleSheet,
-    TextStyle,
-    View,
-    ViewStyle,
+    StyleSheet, View,
+    ViewStyle
 } from "react-native"
 import Animated, {
     Extrapolate,
@@ -28,6 +26,7 @@ import {
 import { translate } from "../../i18n"
 import { OrderService } from "../../models/OrderService"
 import { colors, spacing } from "../../theme"
+import { $row } from "../styles"
 
 const ICON_SIZE = 14
 
@@ -145,29 +144,15 @@ export const OrderServiceCard = observer(function EpisodeCard({
             verticalAlignment="force-footer-bottom"
             onPress={handlePressCard}
             onLongPress={handlePressFavorite}
-            HeadingComponent={
-                <View style={$metadata}>
-                    <Text
-                        style={$metadataText}
-                        size="xxs"
-                        accessibilityLabel={episode.datePublished.accessibilityLabel}
-                    >
-                        {episode.datePublished.textLabel}
-                    </Text>
-                </View>
-            }
+            heading={episode.parsedTitleAndSubtitle.title}
             ContentComponent={
-                <>
-                    <Text>
-                        {episode.parsedTitleAndSubtitle.title}
-                    </Text>
-                    <Text>
-                        {episode.subtitle}
-                    </Text>
-                    <Text
-                        text={episode.description}
-                    />
-                </>
+                <View style={$row}>
+                    <View>
+                        <Text>{episode.description}</Text>
+                        {episode.price && <Text>{episode.price}</Text>}
+                    </View>
+                    <Text>{episode.components.length} componentes</Text>
+                </View>
             }
             {...accessibilityHintProps}
             RightComponent={<Image source={imageUri} style={$itemThumbnail} />}
@@ -223,17 +208,7 @@ const $iconContainer: ViewStyle = {
     marginEnd: spacing.sm,
 }
 
-const $metadata: TextStyle = {
-    color: colors.textDim,
-    marginTop: spacing.xs,
-    flexDirection: "row",
-}
 
-const $metadataText: TextStyle = {
-    color: colors.textDim,
-    marginEnd: spacing.md,
-    marginBottom: spacing.xs,
-}
 
 const $favoriteButton: ViewStyle = {
     borderRadius: 17,

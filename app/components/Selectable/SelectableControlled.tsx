@@ -1,7 +1,7 @@
-import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import * as React from "react";
 import { useController } from "react-hook-form";
 import { Text } from "../Text";
+import { Selectable } from "./Selectable";
 
 export interface SelectableControlledProps {
   name: string
@@ -11,16 +11,15 @@ export interface SelectableControlledProps {
 }
 
 export const SelectableControlled = (props: SelectableControlledProps) => {
-  const { name, control, rules, options, ...selectableProps } = props
+  const { name, control, rules, options } = props
   const { field, fieldState } = useController({ control, name, rules });
 
   return (
     <>
-      <SegmentedControl
-        values={options}
-        selectedIndex={field.value}
+      <Selectable
+        options={options}
+        value={field.value}
         onChange={field.onChange}
-        {...selectableProps}
       />
       <Text preset="error">{fieldState.error ? fieldState.error.message : undefined}</Text>
     </>

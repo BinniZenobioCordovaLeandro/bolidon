@@ -1,6 +1,6 @@
 import { createUserModel, createVehicleModel, UserSnapshotIn, UserSnapshotOut, VehicleSnapshotIn, VehicleSnapshotOut } from "@/models";
 import { ComponentSnapshotIn } from "@/models/Component";
-import { OrderServiceSnapshotIn } from "@/models/OrderService";
+import { createOrderServiceModel, OrderServiceSnapshotIn } from "@/models/OrderService";
 import { getDocs, getFirestore } from "@react-native-firebase/firestore";
 
 export const database = getFirestore();
@@ -84,15 +84,45 @@ export const apiDatabase = {
     const docs = await getDocs(collection);
     const data: OrderServiceSnapshotIn[] = [];
     docs.forEach(doc => {
-      data.push(doc.data() as OrderServiceSnapshotIn);
+      const docData = doc.data();
+      data.push(createOrderServiceModel({
+        guid: doc.id,
+        kilometers: docData.kilometers,
+        price: docData.price,
+        pubDate: docData.pubDate,
+        title: docData.title,
+        description: docData.description,
+        components: docData.components,
+        photos: docData.photos,
+        // estimatedDueDate: docData.estimatedDueDate,
+      }));
     });
     console.log("🚗 orderServices", data)
     return data;
   },
   createOrderService: async (orderService: OrderServiceSnapshotIn): Promise<OrderServiceSnapshotIn> => {
-    const collection =  database.collection("orderServices");
-    const documentRef = await collection.add(orderService);
-    const doc = await documentRef.get();
-    return doc.data() as OrderServiceSnapshotIn;
+    try {
+      const collection =  database.collection("orderServices");
+      const documentRef = await collection.add(orderService);
+      const doc = await documentRef.get();
+      const docData = doc.data();
+      return createOrderServiceModel({
+        guid: doc.id,
+        kilometers: docData?.kilometers,
+        price: docData?.price,
+        pubDate: Date.parse(docData?.pubDate),
+        title: docData?.title,
+        description: docData?.description,
+        components: docData?.components.map((item: any) => {
+          return ({
+            guid: item.guid ?? 0,
+            ...item
+          })
+        }),
+      });
+    } catch (error) {
+      console.error("🚗 createOrderService", error);
+      return {} as OrderServiceSnapshotIn;
+    }
   },
 }

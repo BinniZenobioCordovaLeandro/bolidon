@@ -5,17 +5,17 @@ import * as React from "react";
 export interface SelectableProps {
   options: string[],
   value: string,
-  onChangeText: (text: string) => void
-  renderItem: (item: string) => React.ReactNode
+  onChange: (text: string) => void
+  renderItem?: (item: string) => React.ReactNode
 }
 
 export const Selectable = observer(function Selectable(props: SelectableProps) {
-  const { options, value, onChangeText } = props;
+  const { options, value, onChange: onChangeText } = props;
 
   return (
     <SegmentedControl
       values={options}
-      selectedIndex={options.indexOf(value)}
+      selectedIndex={options.indexOf(value) ?? 0}
       onChange={(event) =>
         onChangeText(options[event.nativeEvent.selectedSegmentIndex])
       }

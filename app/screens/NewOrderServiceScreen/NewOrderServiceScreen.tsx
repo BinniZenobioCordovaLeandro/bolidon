@@ -1,9 +1,10 @@
-import { Button, PhotoGalleryControlled, Screen, Text, Toggle } from "@/components";
+import { Button, Card, Icon, PhotoGalleryControlled, Screen, Text, Toggle } from "@/components";
 import { DatePickerControlled } from "@/components/DatePicker/DatePickerControlled";
 import { SelectableControlled } from "@/components/Selectable/SelectableControlled";
 import { TextFieldControlled } from "@/components/TextField/TextFieldControlled";
 import { useReactForm } from "@/hooks/useForm";
 import { useStores } from "@/models";
+import { Component, componentSchema } from "@/models/Component";
 import { orderServiceSchema } from "@/models/OrderService";
 import { AppStackScreenProps } from "@/navigators";
 import { spacing } from "@/theme";
@@ -11,7 +12,8 @@ import { observer } from "mobx-react-lite";
 import * as React from "react";
 import { FC } from "react";
 import { ImageStyle, View, ViewStyle } from "react-native";
-import { $screenContainer, $textField, $title } from "../styles";
+import { ComponentItemCard } from "../components/ComponentItemCard";
+import { $row, $screenContainer, $textField, $title } from "../styles";
 
 interface NewOrderServiceScreenProps extends AppStackScreenProps<"NewOrderService"> { }
 
@@ -20,12 +22,28 @@ export const NewOrderServiceScreen: FC<NewOrderServiceScreenProps> = observer(fu
 
   const [termsAndConditions, settermsAndConditions] = React.useState(false);
   const { handleSubmit, control } = useReactForm(orderServiceSchema);
-  useStores()
+  const { handleSubmit: handleSubmitComponent, control: controlComponent, reset: resetComponent } = useReactForm(componentSchema);
+
+  const [components, setComponents] = React.useState<Component[]>([]);
+
+  const { orderServiceStore: {
+    createOrderService
+  } } = useStores();
 
   const onSubmitHandler = async (data: any) => {
     console.log("🎁 new order service data", data);
-    // await orderServiceStore.createOrderService(data);
+    await createOrderService({
+      ...data,
+      components,
+    });
     navigation.goBack();
+  }
+
+  const onSubmitComponentHandler = async (data: any) => {
+    console.log("🎁 new component data", data);
+    resetComponent();
+    // await componentStore.createComponent(data);
+    setComponents([...components, data]);
   }
 
   return (
@@ -47,35 +65,63 @@ export const NewOrderServiceScreen: FC<NewOrderServiceScreenProps> = observer(fu
         placeholderTx="NewOrderServiceScreen.titleFieldPlaceholder"
       />
       <TextFieldControlled
-        name="subtitle"
+        name="description"
         control={control}
         containerStyle={$textField}
         labelTx="NewOrderServiceScreen.subtitleFieldLabel"
         placeholderTx="NewOrderServiceScreen.subtitleFieldPlaceholder"
+        multiline
       />
       <View style={$componentGroupContainer}>
         <Text preset="subheading" tx="NewOrderServiceScreen.componentsCardTitle" />
         <Text preset="default" tx="NewOrderServiceScreen.componentsCardDescription" />
         <View style={$headerSeparator} />
-        <TextFieldControlled
-          name="components"
-          control={control}
-          containerStyle={$textField}
-          labelTx="NewOrderServiceScreen.componentFieldLabel"
-          placeholderTx="NewOrderServiceScreen.componentFieldPlaceholder"
-        />
-        <Text preset="default" tx="NewOrderServiceScreen.urgencyLevelFieldLabel" />
-        <SelectableControlled
-          options={["aceptable", "bajo", "medio", "alto"]}
-          name="urgencyLevel"
-          control={control}
-        />
-        <Button
-          tx="NewOrderServiceScreen.addOtherComponent"
-          style={$iconAddComponentField}
-          onPress={() => {
-            console.log("🎁 add other component");            
-          }}
+        {
+          components.map((_component, index) => (
+            <View key={index} style={$row}>
+              <View style={{ flex: 1 }}>
+                <ComponentItemCard component={_component} />
+              </View>
+              <Icon icon="x" onPress={() => setComponents(components.filter((_, i) => i !== index))} />
+            </View>
+          ))
+        }
+        <View style={$headerSeparator} />
+        <Card
+          heading="NewOrderServiceScreen.addComponentCardTitle"
+          ContentComponent={
+            <View>
+              <TextFieldControlled
+                name="component"
+                control={controlComponent}
+                containerStyle={$textField}
+                labelTx="NewOrderServiceScreen.componentFieldLabel"
+                placeholderTx="NewOrderServiceScreen.componentFieldPlaceholder"
+              />
+              <Text preset="default" tx="NewOrderServiceScreen.urgencyLevelFieldLabel" />
+              <SelectableControlled
+                name="urgency"
+                options={["aceptable", "bajo", "medio", "alto"]}
+                control={controlComponent}
+              />
+            </View>
+          }
+          FooterComponent={
+            <View style={$row}>
+              <TextFieldControlled
+                name="notes"
+                control={controlComponent}
+                containerStyle={[$textField, { flex: 1, marginRight: spacing.md }]}
+                labelTx="NewOrderServiceScreen.notesFieldLabel"
+                placeholderTx="NewOrderServiceScreen.notesFieldPlaceholder"
+              />
+              <Button
+                tx="NewOrderServiceScreen.addOtherComponent"
+                style={$iconAddComponentField}
+                onPress={handleSubmitComponent(onSubmitComponentHandler)}
+              />
+            </View>
+          }
         />
       </View>
       <PhotoGalleryControlled

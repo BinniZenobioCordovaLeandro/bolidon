@@ -5,12 +5,13 @@ import * as zod from 'zod';
 export const useReactForm = (
   schema: zod.ZodObject<any, any>
 ) => {
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, reset } = useForm({
     resolver: zodResolver(schema),
   });
 
   return {
     control,
     handleSubmit,
+    reset,
   };
 };

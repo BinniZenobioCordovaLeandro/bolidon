@@ -27,9 +27,9 @@ export const Auth = {
             email,
             isCollaborator: false,
             guid: "",
-            name: undefined,
-            photo: undefined,
-            lastLogin: undefined,
+            name: "",
+            photos: [],
+            lastLogin: 0,
         });
         if (user) return true;
         return false;
@@ -63,7 +63,7 @@ export const Auth = {
                     isCollaborator: false,
                     guid: "",
                     name: user.name || "",
-                    photo: user.photo || "",
+                    photos: [user.photo],
                     lastLogin: Date.now(),
                 });
                 if (!getUser) return undefined;

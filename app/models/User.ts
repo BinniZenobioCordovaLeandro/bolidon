@@ -24,13 +24,14 @@ export const UserModel = types
 export interface User extends Instance<typeof UserModel> {}
 export interface UserSnapshotOut extends SnapshotOut<typeof UserModel> {}
 export interface UserSnapshotIn extends SnapshotIn<typeof UserModel> {}
-export const createUserDefaultModel = () => types.optional(UserModel, {
-  guid: "",
-  email: undefined,
-  name: undefined,
-  photos: [],
-  isCollaborator: undefined,
-  lastLogin: undefined,
-})
 
-export const createUserModel = (data: UserSnapshotIn): User => UserModel.create(data)
+export const createUserModel = (data: UserSnapshotIn): User => {
+  return UserModel.create({
+    guid: data.guid || "",
+    email: data.email || "",
+    name: data.name || "",
+    photos: data.photos || [],
+    isCollaborator: data.isCollaborator || false,
+    lastLogin: data.lastLogin || new Date(),
+  });
+}

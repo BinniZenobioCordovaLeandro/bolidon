@@ -59,6 +59,7 @@ export class Api {
       const orderServices: OrderServiceSnapshotIn[] = await apiDatabase.orderServices(_vehicleGuid);
       return { kind: "ok", orderServices }
     } catch (e) {
+      console.error("🎸 getOrderServices", e);
       return { kind: "bad-data" }
     }
   }

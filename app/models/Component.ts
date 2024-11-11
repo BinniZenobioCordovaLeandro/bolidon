@@ -5,28 +5,27 @@ import { withSetPropAction } from "./helpers/withSetPropAction";
 
 export const componentSchema = zod.object({
   component: zod.string().min(6, "Component must be at least 6 characters"),
-  estimatedDueDate: zod.string().optional(),
-  urgencyLevel: zod.number().min(0).max(3),
-  notes: zod.string().optional().optional(),
+  urgency: zod.string().min(3, "Urgency must be at least 3 characters"),
+  notes: zod.string().optional(),
 });
 
 export const ComponentModel = types
   .model("Component")
   .props({
     component: types.maybeNull(types.string),
-    urgencyLevel: types.enumeration(["high", "medium", "low"]),
+    urgency: types.enumeration(["alto", "medio", "bajo"]),
     notes: types.maybeNull(types.string),
-    estimatedDueDate: types.maybeNull(types.string),
+    estimatedDueDate: types.maybeNull(types.Date),
   })
   .actions(withSetPropAction)
   .views((component) => ({
     get estimatedDueDateFormatted() {
-      return component.estimatedDueDate ? formatDate(component.estimatedDueDate) : ""
+      return component.estimatedDueDate ? formatDate(component.estimatedDueDate.toString()) : ""
     },
     get priorityLevelColor() {
-      if (component.urgencyLevel === "high") return "red"
-      if (component.urgencyLevel === "medium") return "yellow"
-      if (component.urgencyLevel === "low") return "green"
+      if (component.urgency === "high") return "red"
+      if (component.urgency === "medium") return "yellow"
+      if (component.urgency === "low") return "green"
       return "grey"
     },
   }))
